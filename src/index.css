@@ -29,7 +29,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-color: #EDEEF0;
+  background-color: #ffffff;
   color: #1A1A1A;
   min-height: 100vh;
 }
@@ -79,19 +79,20 @@ em,
   font-weight: 400;
 }
 
-.stage-shell {
-  background: #EDEEF0;
-}
-
 .app-stage {
-  max-width: 1440px;
-  margin: 0 auto;
+  width: 100%;
   background: #ffffff;
-  box-shadow: 0 24px 80px -40px rgba(6, 12, 24, 0.35);
 }
 
 .app-stage.theme-dark {
   background: #0B1523;
+}
+
+/* Inneres Content-Limit, damit Text-Spalten auf Riesen-Monitoren nicht ausreiten */
+.content-inner {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 :focus-visible {
