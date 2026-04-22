@@ -5,15 +5,15 @@
 @font-face {
   font-family: "Avenir LT";
   src: url("/fonts/font.woff") format("woff");
-  font-weight: 400 900;
+  font-weight: 300 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Avenir Next LT Pro Italic";
+  font-family: "Avenir Italic";
   src: url("/fonts/AvenirNextLTPro-It.otf") format("opentype");
-  font-weight: 400;
+  font-weight: 400 700;
   font-style: italic;
   font-display: swap;
 }
@@ -24,26 +24,30 @@ html {
 
 body {
   margin: 0;
-  font-family: "Avenir LT", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Avenir LT", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: #0A1A2F;
+  text-rendering: optimizeLegibility;
+  background-color: #EDEEF0;
+  color: #1A1A1A;
+  min-height: 100vh;
 }
 
 em,
 .italic-accent {
-  font-family: "Avenir Next LT Pro Italic", "Avenir LT", italic, sans-serif;
+  font-family: "Avenir Italic", "Avenir LT", italic, sans-serif;
   font-style: italic;
+  font-weight: 500;
 }
 
 .theme-light {
   background-color: #ffffff;
-  color: #0A1A2F;
+  color: #1A1A1A;
 }
 
 .theme-dark {
-  background-color: #0A1A2F;
+  background-color: #0B1523;
   color: #ffffff;
 }
 
@@ -54,22 +58,56 @@ em,
   background: transparent;
 }
 .dark-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 999px;
 }
 .dark-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .caps-label {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
+}
+
+.caps-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.stage-shell {
+  background: #EDEEF0;
+}
+
+.app-stage {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 24px 80px -40px rgba(6, 12, 24, 0.35);
+}
+
+.app-stage.theme-dark {
+  background: #0B1523;
 }
 
 :focus-visible {
   outline: 2px solid #009FE3;
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* Brunner Cyan-Glow oben links im dunklen Panel */
+.cyan-glow {
+  position: absolute;
+  top: -140px;
+  left: -140px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(0, 159, 227, 0.10), rgba(0, 159, 227, 0) 60%);
+  pointer-events: none;
+  z-index: 0;
 }

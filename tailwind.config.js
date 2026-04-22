@@ -4,26 +4,62 @@ export default {
   theme: {
     extend: {
       colors: {
+        cyan: {
+          DEFAULT: "#009FE3",
+          soft: "rgba(0,159,227,0.12)",
+        },
+        ink: {
+          DEFAULT: "#1A1A1A",
+          2: "#333333",
+        },
+        muted: {
+          DEFAULT: "#6B7280",
+          2: "#9CA3AF",
+        },
+        hairline: "#E6E8EB",
+        well: "#F4F4F4",
+        page: "#EDEEF0",
+        dk: {
+          0: "#070E1A",
+          1: "#0B1523",
+          2: "#0F1B2D",
+          3: "#152238",
+          line: "rgba(255,255,255,0.08)",
+          line2: "rgba(255,255,255,0.14)",
+          muted: "#9BA7BA",
+          muted2: "#6B7A90",
+        },
+        // Aliase für Backwards-Compat in unseren bisherigen Komponenten
         brunner: {
           cyan: "#009FE3",
           cyanDark: "#0086C0",
           cyanSoft: "#7FCFF1",
-          dark: "#0A1A2F",
-          darkSoft: "#13253D",
-          darkLine: "#1F3552",
-          light: "#F4F5F7",
+          dark: "#0B1523",
+          darkSoft: "#0F1B2D",
+          darkLine: "#152238",
+          light: "#F4F4F4",
           lightSoft: "#FAFAFB",
         },
       },
       fontFamily: {
-        sans: ['"Avenir LT"', "system-ui", "-apple-system", "Segoe UI", "Helvetica", "Arial", "sans-serif"],
-        italic: ['"Avenir Next LT Pro Italic"', '"Avenir LT"', "italic", "system-ui", "sans-serif"],
+        sans: ['"Avenir LT"', '"Helvetica Neue"', "Helvetica", "Arial", "sans-serif"],
+        italic: ['"Avenir Italic"', '"Avenir LT"', "italic", "sans-serif"],
+      },
+      borderRadius: {
+        s: "4px",
+        m: "6px",
       },
       maxWidth: {
-        content: "1240px",
+        content: "1440px",
+        inner: "1296px",
+      },
+      letterSpacing: {
+        tightest: "-0.025em",
+        caps: "0.18em",
+        capsm: "0.08em",
       },
       transitionTimingFunction: {
-        smooth: "cubic-bezier(0.22, 1, 0.36, 1)",
+        smooth: "cubic-bezier(0.2, 0.7, 0.2, 1)",
       },
       keyframes: {
         slideInRight: {
@@ -39,11 +75,16 @@ export default {
           "50%": { transform: "scale(1.25)" },
           "100%": { transform: "scale(1)" },
         },
+        pulseDot: {
+          "0%, 100%": { boxShadow: "0 0 0 3px rgba(0,159,227,0.18)" },
+          "50%": { boxShadow: "0 0 0 6px rgba(0,159,227,0.0)" },
+        },
       },
       animation: {
-        "slide-in-right": "slideInRight 320ms cubic-bezier(0.22, 1, 0.36, 1)",
-        "fade-in": "fadeIn 220ms ease-out",
+        "slide-in-right": "slideInRight 450ms cubic-bezier(0.2, 0.7, 0.2, 1)",
+        "fade-in": "fadeIn 350ms ease-out",
         "badge-pulse": "badgePulse 480ms ease-out",
+        "pulse-dot": "pulseDot 1800ms ease-in-out infinite",
       },
     },
   },

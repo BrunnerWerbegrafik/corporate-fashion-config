@@ -30,8 +30,8 @@ export function LogoUploader({ file, onChange }: LogoUploaderProps) {
   return (
     <div>
       <div className="flex items-center gap-2 mb-3">
-        <h3 className="font-semibold">Logo hochladen</h3>
-        <span className="px-2 py-0.5 text-[10px] caps-label bg-brunner-cyan text-white rounded-sm">
+        <h3 className="font-medium text-white">Logo hochladen</h3>
+        <span className="px-2 py-0.5 text-[10px] caps-label bg-cyan text-white rounded-s">
           Empfohlen
         </span>
       </div>
@@ -49,8 +49,8 @@ export function LogoUploader({ file, onChange }: LogoUploaderProps) {
             const f = e.dataTransfer.files?.[0];
             if (f) validateAndSet(f);
           }}
-          className={`block cursor-pointer rounded-sm border-2 border-dashed p-6 text-center transition-colors ${
-            drag ? "border-brunner-cyan bg-brunner-cyan/10" : "border-white/20 hover:border-white/40 bg-white/5"
+          className={`block cursor-pointer rounded-m border-2 border-dashed p-6 text-center transition-colors ${
+            drag ? "border-cyan bg-cyan-soft" : "border-dk-line2 hover:border-white/30 bg-white/[0.03]"
           }`}
         >
           <input
@@ -60,24 +60,26 @@ export function LogoUploader({ file, onChange }: LogoUploaderProps) {
             onChange={(e) => validateAndSet(e.target.files?.[0] ?? null)}
             className="sr-only"
           />
-          <UploadIcon size={32} className="mx-auto text-white/60 mb-3" />
-          <p className="text-sm text-white/80 mb-2">
-            Lade dein Logo hoch – wir erstellen dir damit eine Visualisierung deiner konfigurierten Textilien.
+          <UploadIcon size={32} className="mx-auto text-dk-muted mb-3" />
+          <p className="text-sm text-white/85 mb-2 leading-relaxed">
+            Lade dein Logo hoch – wir erstellen damit eine Visualisierung deiner konfigurierten Textilien.
           </p>
-          <p className="text-xs text-white/50">SVG, PDF, AI, EPS, PNG, JPG · Vektor bevorzugt · max. 20 MB</p>
+          <p className="text-xs text-dk-muted2">
+            SVG, PDF, AI, EPS, PNG, JPG · <em className="italic">Vektor bevorzugt</em> · max. 20 MB
+          </p>
         </label>
       ) : (
-        <div className="flex items-center gap-3 p-3 rounded-sm bg-brunner-cyan/15 border border-brunner-cyan/40">
-          <CheckIcon size={18} className="text-brunner-cyan flex-shrink-0" />
+        <div className="flex items-center gap-3 p-3 rounded-m bg-cyan-soft border border-cyan/40">
+          <CheckIcon size={18} className="text-cyan flex-shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold truncate">{file.name}</p>
-            <p className="text-xs text-white/60">{(file.size / 1024).toFixed(0)} KB</p>
+            <p className="text-sm font-medium text-white truncate">{file.name}</p>
+            <p className="text-xs text-dk-muted">{(file.size / 1024).toFixed(0)} KB</p>
           </div>
           <button
             type="button"
             onClick={() => validateAndSet(null)}
             aria-label="Datei entfernen"
-            className="p-1 rounded-sm hover:bg-white/10"
+            className="p-1 rounded-s hover:bg-white/10 text-white"
           >
             <CloseIcon size={16} />
           </button>

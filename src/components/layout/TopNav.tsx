@@ -1,45 +1,65 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { CartBadge } from "./CartBadge";
 
 interface TopNavProps {
   theme: "light" | "dark";
 }
 
+const navItems = [
+  { label: "Sortiment", to: "/" },
+  { label: "Veredelungen", to: "/#veredelungen" },
+  { label: "Ablauf", to: "/#ablauf" },
+  { label: "Kontakt", to: "/anfrage" },
+];
+
 export function TopNav({ theme }: TopNavProps) {
   const isDark = theme === "dark";
-  const wrapperClass = isDark
-    ? "bg-brunner-dark text-white border-b border-white/10"
-    : "bg-white text-brunner-dark border-b border-brunner-light";
+  const location = useLocation();
+  const wrapper = isDark
+    ? "bg-dk-1 text-white border-b border-dk-line"
+    : "bg-white text-ink border-b border-hairline";
 
   return (
-    <header className={`w-full ${wrapperClass}`}>
-      <div className="max-w-content mx-auto px-6 py-4 flex items-center justify-between">
-        <Link
-          to="/"
-          aria-label="Zur Startseite"
-          className="flex items-center gap-3"
-        >
+    <header className={`relative z-30 ${wrapper}`}>
+      <div className="h-[72px] px-6 md:px-12 lg:px-[72px] flex items-center justify-between">
+        <Link to="/" aria-label="Brunner Werbegrafik" className="block">
           <img
             src="/images/logo-brunner.svg"
-            alt="Brunner Werbegrafik"
-            className={`h-9 w-auto ${isDark ? "brightness-0 invert" : ""}`}
+            alt="Brunner | Werbegrafik"
+            className={`h-[22px] w-auto block ${isDark ? "brightness-0 invert" : ""}`}
           />
-          <span className="hidden sm:inline-block text-xs caps-label opacity-70">
-            Corporate Fashion
-          </span>
         </Link>
 
-        <nav className="flex items-center gap-2">
-          <a
-            href="https://www.brunner-werbegrafik.de/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`hidden md:inline-block text-sm transition-colors ${isDark ? "text-white/70 hover:text-brunner-cyanSoft" : "text-brunner-dark/70 hover:text-brunner-cyan"}`}
-          >
-            brunner-werbegrafik.de ↗
-          </a>
+        <div className="flex items-center gap-7">
+          <nav className="hidden md:flex items-center gap-7">
+            {navItems.map((item) => {
+              const isActive =
+                (item.to === "/" && location.pathname === "/") ||
+                (item.to !== "/" && location.pathname.startsWith(item.to.replace(/#.*/, "")));
+              const baseClass = "text-sm tracking-wide transition-colors";
+              const colorClass = isDark
+                ? isActive
+                  ? "text-white font-medium"
+                  : "text-white/70 hover:text-cyan"
+                : isActive
+                ? "text-ink font-medium"
+                : "text-ink-2 hover:text-cyan";
+              if (item.to.includes("#")) {
+                return (
+                  <NavLink key={item.label} to={item.to} className={`${baseClass} ${colorClass}`}>
+                    {item.label}
+                  </NavLink>
+                );
+              }
+              return (
+                <NavLink key={item.label} to={item.to} className={`${baseClass} ${colorClass}`}>
+                  {item.label}
+                </NavLink>
+              );
+            })}
+          </nav>
           <CartBadge theme={theme} />
-        </nav>
+        </div>
       </div>
     </header>
   );

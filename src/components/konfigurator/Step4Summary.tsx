@@ -32,92 +32,85 @@ export function Step4Summary({
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold mb-3">Alles auf einen Blick</h2>
-        <p className="text-white/70">Prüfe deine Auswahl – und leg sie in den Anfragekorb.</p>
-      </div>
-
       <div className="space-y-4">
-        <div className="bg-white/5 border border-white/10 rounded-sm p-5 flex gap-4 items-start">
-          <img
-            src={variant?.images[0] ?? product.defaultImage}
-            alt={product.name}
-            className="w-20 h-20 object-cover rounded-sm flex-shrink-0"
-          />
-          <div className="flex-1">
-            <p className="caps-label text-white/40 mb-1">Produkt</p>
-            <p className="font-semibold text-lg">{product.name}</p>
-            <p className="text-white/70 text-sm">
-              Farbe: {variant?.name ?? "—"} · {quantity} Stück · Min. {product.minQuantity}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => onJumpToStep(1)}
-            className="inline-flex items-center gap-1 text-brunner-cyan hover:text-brunner-cyanSoft text-sm"
-          >
-            <EditIcon size={14} /> Bearbeiten
-          </button>
-        </div>
-
-        <div className="bg-white/5 border border-white/10 rounded-sm p-5 flex gap-4 items-start">
-          <div className="w-20 h-20 bg-brunner-cyan/15 rounded-sm flex items-center justify-center text-brunner-cyan font-bold text-2xl flex-shrink-0">
-            {finishing === "druck" ? "D" : finishing === "stick" ? "S" : "?"}
-          </div>
-          <div className="flex-1">
-            <p className="caps-label text-white/40 mb-1">Veredelung</p>
-            <p className="font-semibold text-lg capitalize">{finishing ?? "—"}</p>
-            <p className="text-white/70 text-sm">
-              Konkretes Verfahren wird mit dir abgestimmt.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => onJumpToStep(2)}
-            className="inline-flex items-center gap-1 text-brunner-cyan hover:text-brunner-cyanSoft text-sm"
-          >
-            <EditIcon size={14} /> Bearbeiten
-          </button>
-        </div>
-
-        <div className="bg-white/5 border border-white/10 rounded-sm p-5 flex gap-4 items-start">
-          <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-sm flex items-center justify-center text-white/40 font-bold text-2xl flex-shrink-0">
-            {positionLabels.length}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="caps-label text-white/40 mb-1">Positionen</p>
-            <p className="font-semibold text-lg">
-              {positionLabels.length === 0
-                ? "Keine ausgewählt"
-                : positionLabels.map((p) => p.name).join(", ")}
-            </p>
-            {positionNote && (
-              <p className="text-white/60 text-sm mt-1 italic">„{positionNote}"</p>
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={() => onJumpToStep(3)}
-            className="inline-flex items-center gap-1 text-brunner-cyan hover:text-brunner-cyanSoft text-sm"
-          >
-            <EditIcon size={14} /> Bearbeiten
-          </button>
-        </div>
+        <SummaryRow
+          label="Produkt"
+          imageNode={
+            <img
+              src={variant?.images[0] ?? product.defaultImage}
+              alt=""
+              className="w-20 h-20 object-cover rounded-s flex-shrink-0"
+            />
+          }
+          title={product.name}
+          subtitle={`Farbe: ${variant?.name ?? "—"} · ${quantity} Stück · Min. ${product.minQuantity}`}
+          onEdit={() => onJumpToStep(1)}
+        />
+        <SummaryRow
+          label="Veredelung"
+          imageNode={
+            <div className="w-20 h-20 bg-cyan-soft rounded-s grid place-items-center text-cyan font-medium text-2xl flex-shrink-0">
+              {finishing === "druck" ? "D" : finishing === "stick" ? "S" : "?"}
+            </div>
+          }
+          title={finishing === "druck" ? "Druck" : finishing === "stick" ? "Stick" : "—"}
+          subtitle="Konkretes Verfahren wird mit dir abgestimmt."
+          onEdit={() => onJumpToStep(2)}
+        />
+        <SummaryRow
+          label="Positionen"
+          imageNode={
+            <div className="w-20 h-20 bg-white/[0.03] border border-dk-line rounded-s grid place-items-center text-dk-muted font-medium text-2xl flex-shrink-0">
+              {positionLabels.length}
+            </div>
+          }
+          title={positionLabels.length === 0 ? "Keine ausgewählt" : positionLabels.map((p) => p.name).join(", ")}
+          subtitle={positionNote ? `Notiz: „${positionNote}"` : undefined}
+          onEdit={() => onJumpToStep(3)}
+        />
       </div>
 
       <div className="mt-8">
-        <label htmlFor="final-note" className="caps-label text-white/50 block mb-2">
+        <label htmlFor="final-note" className="caps-label text-dk-muted2 block mb-2">
           Abschluss-Notiz (optional)
         </label>
         <textarea
           id="final-note"
           rows={3}
-          placeholder="z.B. 'Wunschtermin Mitte Mai' oder 'Erstmal nur Angebot, Bestellung folgt'"
+          placeholder={'z.B. „Wunschtermin Mitte Mai" oder „Erstmal nur Angebot, Bestellung folgt"'}
           value={finalNote}
           onChange={(e) => onChangeFinalNote(e.target.value)}
-          className="w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3 text-white placeholder-white/30 focus:border-brunner-cyan focus:outline-none"
+          className="w-full bg-white/[0.03] border border-dk-line2 rounded-m px-4 py-3 text-white placeholder-dk-muted2/70 focus:border-cyan focus:outline-none transition-colors"
         />
       </div>
+    </div>
+  );
+}
+
+interface SummaryRowProps {
+  label: string;
+  imageNode: React.ReactNode;
+  title: string;
+  subtitle?: string;
+  onEdit: () => void;
+}
+
+function SummaryRow({ label, imageNode, title, subtitle, onEdit }: SummaryRowProps) {
+  return (
+    <div className="bg-white/[0.03] border border-dk-line rounded-m p-5 flex gap-4 items-start">
+      {imageNode}
+      <div className="flex-1 min-w-0">
+        <p className="caps-label text-dk-muted2 mb-1">{label}</p>
+        <p className="font-medium text-lg text-white">{title}</p>
+        {subtitle && <p className="text-dk-muted text-sm mt-1">{subtitle}</p>}
+      </div>
+      <button
+        type="button"
+        onClick={onEdit}
+        className="inline-flex items-center gap-1 text-cyan hover:text-white text-sm transition-colors"
+      >
+        <EditIcon size={14} /> Bearbeiten
+      </button>
     </div>
   );
 }

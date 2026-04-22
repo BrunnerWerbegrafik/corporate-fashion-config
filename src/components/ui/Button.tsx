@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "outline-light" | "outline-dark" | "ghost-light" | "ghost-dark";
+type Variant = "primary" | "primary-light" | "outline-light" | "outline-dark" | "ghost-light" | "ghost-dark";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,22 +10,24 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
+  // Primärer CTA in der dunklen Welt = Schwarz (statt Cyan), wie im Design
   primary:
-    "bg-brunner-cyan text-white hover:bg-brunner-cyanDark active:bg-brunner-cyanDark border border-brunner-cyan",
+    "bg-black text-white hover:bg-ink active:bg-ink border border-black",
+  // Primärer CTA in der hellen Welt = Cyan
+  "primary-light":
+    "bg-cyan text-white hover:bg-[#0086C0] active:bg-[#0086C0] border border-cyan",
   "outline-light":
-    "border border-brunner-dark text-brunner-dark bg-transparent hover:bg-brunner-dark hover:text-white",
+    "border border-ink/30 text-ink bg-transparent hover:bg-ink hover:text-white",
   "outline-dark":
-    "border border-white/30 text-white bg-transparent hover:bg-white/10",
-  "ghost-light":
-    "text-brunner-dark bg-transparent hover:bg-brunner-light",
-  "ghost-dark":
-    "text-white bg-transparent hover:bg-white/10",
+    "border border-white/14 text-white bg-transparent hover:bg-white/8",
+  "ghost-light": "text-ink-2 bg-transparent hover:text-cyan",
+  "ghost-dark": "text-dk-muted bg-transparent hover:text-white",
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-5 py-2.5 text-base",
-  lg: "px-7 py-3.5 text-base",
+  sm: "px-3.5 py-2 text-sm rounded-s",
+  md: "px-5 py-3 text-[15px] rounded-m",
+  lg: "px-7 py-4 text-[15px] rounded-m",
 };
 
 export function Button({
@@ -38,7 +40,7 @@ export function Button({
   return (
     <button
       {...rest}
-      className={`inline-flex items-center justify-center gap-2 font-semibold rounded-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-3 font-medium transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
     >
       {children}
     </button>

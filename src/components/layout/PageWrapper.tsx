@@ -8,13 +8,15 @@ interface PageWrapperProps {
 }
 
 export function PageWrapper({ theme, children }: PageWrapperProps) {
-  const wrapperClass = theme === "dark" ? "theme-dark" : "theme-light";
+  const themeClass = theme === "dark" ? "theme-dark" : "theme-light";
 
   return (
-    <div className={`min-h-screen flex flex-col ${wrapperClass}`}>
-      <TopNav theme={theme} />
-      <main className="flex-1 w-full">{children}</main>
-      <Footer theme={theme} />
+    <div className="stage-shell min-h-screen">
+      <div className={`app-stage ${themeClass} relative min-h-screen flex flex-col overflow-hidden`}>
+        <TopNav theme={theme} />
+        <main className="flex-1 w-full">{children}</main>
+        <Footer theme={theme} />
+      </div>
     </div>
   );
 }

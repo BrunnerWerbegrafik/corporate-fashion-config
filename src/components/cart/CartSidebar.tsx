@@ -15,21 +15,21 @@ export function CartSidebar({ logoFile, onLogoChange }: CartSidebarProps) {
   const stickCount = entries.filter((e) => e.finishingType === "stick").length;
 
   return (
-    <aside className="bg-white/5 border border-white/10 rounded-sm p-6 md:p-7 flex flex-col gap-6 sticky top-6">
+    <aside className="bg-white/[0.03] border border-dk-line rounded-m p-6 md:p-7 flex flex-col gap-6 sticky top-6">
       <div>
-        <h2 className="text-xl font-bold mb-4">Zusammenfassung</h2>
-        <dl className="space-y-2 text-sm">
+        <h2 className="text-xl font-medium tracking-tight text-white mb-4">Zusammenfassung</h2>
+        <dl className="space-y-2.5 text-sm">
           <div className="flex justify-between">
-            <dt className="text-white/60">Artikel</dt>
-            <dd className="font-semibold">{totalItems}</dd>
+            <dt className="text-dk-muted">Artikel</dt>
+            <dd className="font-medium text-white tabular-nums">{totalItems}</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-white/60">Gesamtmenge</dt>
-            <dd className="font-semibold">{totalQuantity} Stück</dd>
+            <dt className="text-dk-muted">Gesamtmenge</dt>
+            <dd className="font-medium text-white tabular-nums">{totalQuantity} Stück</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-white/60">Veredelungen</dt>
-            <dd className="font-semibold">
+            <dt className="text-dk-muted">Veredelungen</dt>
+            <dd className="font-medium text-white">
               {druckCount > 0 && `${druckCount}× Druck`}
               {druckCount > 0 && stickCount > 0 && ", "}
               {stickCount > 0 && `${stickCount}× Stick`}
@@ -39,13 +39,13 @@ export function CartSidebar({ logoFile, onLogoChange }: CartSidebarProps) {
         </dl>
       </div>
 
-      <div className="border-t border-white/10 pt-6">
+      <div className="border-t border-dk-line pt-6">
         <LogoUploader file={logoFile} onChange={onLogoChange} />
       </div>
 
-      <div className="border-t border-white/10 pt-6">
-        <p className="text-sm text-white/70 leading-relaxed mb-5">
-          Du erhältst innerhalb von 24 Stunden ein <em>individuelles Angebot</em> per E-Mail – inkl. Veredelungs-Vorschau und finalem Preis.
+      <div className="border-t border-dk-line pt-6">
+        <p className="text-sm text-dk-muted leading-relaxed mb-5">
+          Du erhältst innerhalb von 24 Stunden ein <em className="text-cyan">individuelles Angebot</em> per E-Mail – inkl. Veredelungs-Vorschau und finalem Preis.
         </p>
         <div className="flex flex-col gap-3">
           <Link to="/anfrage">
@@ -61,8 +61,8 @@ export function CartSidebar({ logoFile, onLogoChange }: CartSidebarProps) {
         </div>
       </div>
 
-      <p className="text-xs text-white/40 italic border-t border-white/10 pt-4">
-        Dein Anfragekorb wird automatisch gespeichert – du kannst später zurückkehren.
+      <p className="text-xs text-dk-muted2 italic border-t border-dk-line pt-4">
+        <em>Dein Anfragekorb wird automatisch gespeichert – du kannst später zurückkehren.</em>
       </p>
     </aside>
   );

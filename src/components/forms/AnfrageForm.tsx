@@ -31,7 +31,7 @@ const initial: AnfrageFormValues = {
 };
 
 const inputClass =
-  "w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3 text-white placeholder-white/30 focus:border-brunner-cyan focus:outline-none transition-colors";
+  "w-full bg-white/[0.03] border border-dk-line2 rounded-m px-4 py-3 text-white placeholder-dk-muted2/70 focus:border-cyan focus:outline-none transition-colors";
 
 export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
   const [values, setValues] = useState<AnfrageFormValues>(initial);
@@ -82,7 +82,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
     <form onSubmit={handleSubmit} noValidate>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-          <label className="caps-label text-white/50 block mb-2" htmlFor="firstName">
+          <label className="caps-label text-dk-muted2 block mb-2" htmlFor="firstName">
             Vorname *
           </label>
           <input
@@ -97,7 +97,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
           {errors.firstName && <p className="text-xs text-red-300 mt-1">{errors.firstName}</p>}
         </div>
         <div>
-          <label className="caps-label text-white/50 block mb-2" htmlFor="lastName">
+          <label className="caps-label text-dk-muted2 block mb-2" htmlFor="lastName">
             Nachname *
           </label>
           <input
@@ -112,7 +112,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
           {errors.lastName && <p className="text-xs text-red-300 mt-1">{errors.lastName}</p>}
         </div>
         <div className="md:col-span-2">
-          <label className="caps-label text-white/50 block mb-2" htmlFor="company">
+          <label className="caps-label text-dk-muted2 block mb-2" htmlFor="company">
             Firma *
           </label>
           <input
@@ -127,7 +127,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
           {errors.company && <p className="text-xs text-red-300 mt-1">{errors.company}</p>}
         </div>
         <div>
-          <label className="caps-label text-white/50 block mb-2" htmlFor="email">
+          <label className="caps-label text-dk-muted2 block mb-2" htmlFor="email">
             E-Mail *
           </label>
           <input
@@ -142,7 +142,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
           {errors.email && <p className="text-xs text-red-300 mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="caps-label text-white/50 block mb-2" htmlFor="phone">
+          <label className="caps-label text-dk-muted2 block mb-2" htmlFor="phone">
             Telefon *
           </label>
           <input
@@ -157,7 +157,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
           {errors.phone && <p className="text-xs text-red-300 mt-1">{errors.phone}</p>}
         </div>
         <div className="md:col-span-2">
-          <label className="caps-label text-white/50 block mb-2" htmlFor="note">
+          <label className="caps-label text-dk-muted2 block mb-2" htmlFor="note">
             Notiz (optional)
           </label>
           <textarea
@@ -177,27 +177,28 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
             type="checkbox"
             checked={values.dataPrivacyAccepted}
             onChange={(e) => update("dataPrivacyAccepted", e.target.checked)}
-            className="mt-1 w-4 h-4 accent-brunner-cyan"
+            className="mt-1 w-4 h-4 accent-cyan"
           />
-          <span className="text-sm text-white/80">
-            Ich habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="text-brunner-cyan hover:underline">Datenschutzerklärung</a> gelesen und willige in die Verarbeitung meiner Daten ein. *
+          <span className="text-sm text-white/85">
+            Ich habe die <a href="/datenschutz" target="_blank" rel="noopener noreferrer" className="text-cyan hover:underline">Datenschutzerklärung</a> gelesen und willige in die Verarbeitung meiner Daten ein. *
           </span>
         </label>
         {errors.dataPrivacyAccepted && (
           <p className="text-xs text-red-300 mt-1 ml-7">{errors.dataPrivacyAccepted}</p>
         )}
-        <p className="text-xs text-white/50 mt-2 ml-7 italic">
+        <p className="text-xs text-dk-muted2 mt-2 ml-7 italic">
           <em>Deine Daten werden ausschließlich zur Beantwortung deiner Anfrage verwendet.</em>
         </p>
       </div>
 
-      <div className="mt-4 text-xs text-white/50">
-        Logo-Datei: {logoFile ? <strong className="text-white/80">{logoFile.name}</strong> : "Keine hochgeladen"} ·
-        Artikel im Korb: <strong className="text-white/80">{entries.length}</strong>
+      <div className="mt-4 text-xs text-dk-muted2">
+        Logo-Datei: {logoFile ? <strong className="text-white/85">{logoFile.name}</strong> : "Keine hochgeladen"}
+        <span className="mx-2 text-dk-muted2/50">·</span>
+        Artikel im Korb: <strong className="text-white/85">{entries.length}</strong>
       </div>
 
       {submitError && (
-        <div className="mt-4 p-3 rounded-sm bg-red-500/15 border border-red-400/40 text-sm text-red-200">
+        <div className="mt-4 p-3 rounded-m bg-red-500/15 border border-red-400/40 text-sm text-red-200">
           {submitError}
         </div>
       )}
@@ -212,7 +213,7 @@ export function AnfrageForm({ entries, logoFile, onSubmit }: AnfrageFormProps) {
           <Button variant="primary" size="lg" type="submit" disabled={submitting || noEntries}>
             {submitting ? "Wird gesendet …" : "Anfrage absenden"} <ArrowRightIcon size={18} />
           </Button>
-          <span className="text-xs text-white/50 mt-2 md:text-right">
+          <span className="text-xs text-dk-muted2 mt-2 md:text-right">
             Du erhältst eine Bestätigung per E-Mail.
           </span>
         </div>

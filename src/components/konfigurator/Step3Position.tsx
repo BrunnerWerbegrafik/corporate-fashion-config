@@ -43,12 +43,7 @@ export function Step3Position({
 
   return (
     <div>
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold mb-3">Position wählen</h2>
-        <p className="text-white/70">Wo soll dein Logo platziert werden? Mehrfachauswahl möglich – auch über Bereiche hinweg.</p>
-      </div>
-
-      <div className="flex border-b border-white/10 mb-6">
+      <div className="flex border-b border-dk-line mb-6">
         {tabs.map((t) => {
           const isActive = activeTab === t.id;
           const count = countForTab(t.id);
@@ -58,11 +53,11 @@ export function Step3Position({
               type="button"
               onClick={() => setActiveTab(t.id)}
               className={`flex-1 px-4 py-3 text-left transition-colors border-b-2 ${
-                isActive ? "border-brunner-cyan text-white" : "border-transparent text-white/60 hover:text-white"
+                isActive ? "border-cyan text-white" : "border-transparent text-dk-muted hover:text-white"
               }`}
             >
-              <span className="block font-semibold">{t.label}</span>
-              <span className="block text-xs text-white/50">
+              <span className="block font-medium">{t.label}</span>
+              <span className="block text-xs text-dk-muted2 mt-0.5">
                 {count > 0 ? `${count} ausgewählt` : "keine"}
               </span>
             </button>
@@ -79,10 +74,10 @@ export function Step3Position({
               key={p.id}
               type="button"
               onClick={() => onTogglePosition(p.id)}
-              className={`text-left p-4 rounded-sm border-2 transition-all ${
+              className={`text-left p-4 rounded-m border-2 transition-all ${
                 isSelected
-                  ? "border-brunner-cyan bg-brunner-cyan/10"
-                  : "border-white/15 bg-white/5 hover:border-white/40"
+                  ? "border-cyan bg-cyan-soft"
+                  : "border-dk-line2 bg-white/[0.03] hover:border-white/30"
               }`}
             >
               <div className="aspect-square mb-3 flex items-center justify-center text-white/30">
@@ -92,8 +87,8 @@ export function Step3Position({
                   className="w-full h-full"
                 />
               </div>
-              <p className="font-semibold">{p.name}</p>
-              <p className="text-sm text-white/60 mt-1">{p.shortDescription}</p>
+              <p className="font-medium text-white">{p.name}</p>
+              <p className="text-sm text-dk-muted mt-1">{p.shortDescription}</p>
             </button>
           );
         })}
@@ -101,7 +96,7 @@ export function Step3Position({
 
       {selectedPositionIds.length > 0 && (
         <div className="mb-6">
-          <p className="caps-label text-white/50 mb-2">Ausgewählte Positionen</p>
+          <p className="caps-label text-dk-muted2 mb-2">Ausgewählte Positionen</p>
           <div className="flex flex-wrap gap-2">
             {selectedPositionIds.map((id) => {
               const p = positionService.getById(id);
@@ -110,7 +105,7 @@ export function Step3Position({
               return (
                 <span
                   key={id}
-                  className="inline-flex items-center gap-2 pl-3 pr-1 py-1 bg-brunner-cyan/15 border border-brunner-cyan/40 rounded-full text-sm"
+                  className="inline-flex items-center gap-2 pl-3 pr-1 py-1 bg-cyan-soft border border-cyan/40 rounded-full text-sm text-white"
                 >
                   {tabLabel} · {p.name}
                   <button
@@ -128,21 +123,21 @@ export function Step3Position({
         </div>
       )}
 
-      <p className="italic text-white/60 text-sm mb-4">
+      <p className="italic text-dk-muted text-sm mb-4">
         <em>Du kannst Positionen aus allen Bereichen gleichzeitig wählen.</em>
       </p>
 
       <div>
-        <label htmlFor="position-note" className="caps-label text-white/50 block mb-2">
+        <label htmlFor="position-note" className="caps-label text-dk-muted2 block mb-2">
           Notiz (optional)
         </label>
         <textarea
           id="position-note"
           rows={3}
-          placeholder="z.B. 'Logo ca. 8cm breit auf Herzhöhe'"
+          placeholder={'z.B. „Logo ca. 8cm breit auf Herzhöhe"'}
           value={positionNote}
           onChange={(e) => onChangeNote(e.target.value)}
-          className="w-full bg-white/5 border border-white/15 rounded-sm px-4 py-3 text-white placeholder-white/30 focus:border-brunner-cyan focus:outline-none"
+          className="w-full bg-white/[0.03] border border-dk-line2 rounded-m px-4 py-3 text-white placeholder-dk-muted2/70 focus:border-cyan focus:outline-none transition-colors"
         />
       </div>
     </div>

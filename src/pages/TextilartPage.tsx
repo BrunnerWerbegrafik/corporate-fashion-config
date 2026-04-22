@@ -21,9 +21,9 @@ export function TextilartPage() {
   if (!type) {
     return (
       <PageWrapper theme="light">
-        <div className="max-w-content mx-auto px-6 py-24 text-center">
-          <h1 className="text-3xl font-bold mb-4">Kategorie nicht gefunden</h1>
-          <Link to="/" className="text-brunner-cyan hover:underline">
+        <div className="px-6 md:px-12 lg:px-[72px] py-24 text-center">
+          <h1 className="text-3xl font-medium mb-4">Kategorie nicht gefunden</h1>
+          <Link to="/" className="text-cyan hover:underline">
             Zurück zur Startseite
           </Link>
         </div>
@@ -33,42 +33,38 @@ export function TextilartPage() {
 
   return (
     <PageWrapper theme="light">
-      <div className="max-w-content mx-auto px-6 pt-8 pb-4">
-        <nav aria-label="Breadcrumb" className="text-sm text-brunner-dark/60">
-          <Link to="/" className="hover:text-brunner-cyan">
-            Textilarten
+      <header className="px-6 md:px-12 lg:px-[72px] pt-12 md:pt-16 pb-12">
+        <nav aria-label="Breadcrumb" className="text-sm text-muted mb-6">
+          <Link to="/" className="hover:text-cyan">
+            Sortiment
           </Link>
-          <span className="mx-2">/</span>
-          <span className="text-brunner-dark">{type.name}</span>
+          <span className="mx-2 text-muted-2">›</span>
+          <span className="text-ink">{type.name}</span>
         </nav>
-      </div>
-
-      <section className="max-w-content mx-auto px-6 pt-6 pb-12">
-        <h1 className="text-5xl md:text-7xl font-bold text-brunner-dark tracking-tight">
+        <div className="caps-eyebrow text-muted mb-5 inline-flex items-center gap-2.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan" />
+          Schritt 2 · Produkt wählen
+        </div>
+        <h1 className="text-[44px] md:text-[64px] lg:text-[76px] font-medium leading-[1.0] tracking-tightest text-ink m-0">
           {type.name}
         </h1>
-        <p className="text-lg md:text-xl text-brunner-dark/70 mt-4 max-w-2xl">
+        <p className="text-base md:text-lg text-muted mt-4 max-w-2xl">
           {type.shortDescription}
         </p>
-      </section>
+      </header>
 
-      <section className="max-w-content mx-auto px-6 pb-20">
+      <section className="px-6 md:px-12 lg:px-[72px] pb-24">
         {products.length === 0 ? (
-          <div className="bg-brunner-light p-10 rounded-sm text-center">
-            <p className="text-brunner-dark/70 mb-6">
-              In dieser Kategorie sind aktuell keine Produkte hinterlegt.
-            </p>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-brunner-cyan hover:text-brunner-cyanDark font-semibold"
-            >
+          <div className="bg-well p-10 rounded-m text-center">
+            <p className="text-muted mb-6">In dieser Kategorie sind aktuell keine Produkte hinterlegt.</p>
+            <Link to="/" className="inline-flex items-center gap-2 text-cyan font-medium">
               <ArrowLeftIcon size={16} /> Zurück zur Übersicht
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {products.map((p) => (
-              <ProductCard key={p.id} product={p} onOpen={() => setOpenProduct(p)} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((p, idx) => (
+              <ProductCard key={p.id} product={p} onOpen={() => setOpenProduct(p)} index={idx + 1} />
             ))}
           </div>
         )}
