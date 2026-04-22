@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Avenir LT";
+  src: url("/fonts/font.woff") format("woff");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next LT Pro Italic";
+  src: url("/fonts/AvenirNextLTPro-It.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir LT", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
+  color: #0A1A2F;
+}
+
+em,
+.italic-accent {
+  font-family: "Avenir Next LT Pro Italic", "Avenir LT", italic, sans-serif;
+  font-style: italic;
+}
+
+.theme-light {
+  background-color: #ffffff;
+  color: #0A1A2F;
+}
+
+.theme-dark {
+  background-color: #0A1A2F;
+  color: #ffffff;
+}
+
+.dark-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.dark-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dark-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+.dark-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.caps-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 2px solid #009FE3;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
