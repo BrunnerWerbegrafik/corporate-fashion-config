@@ -154,16 +154,15 @@ function CategoryCard({ category }: { category: CategoryTile }) {
       className="group block focus:outline-none"
       aria-label={`${category.name} – ${category.description}`}
     >
-      {/* Bildbereich mit grauem Backdrop */}
+      {/* Bildbereich mit grauem Backdrop – wächst nach oben + dunkler beim Hover */}
       <div className="relative aspect-[520/390] w-full">
         <div
-          className="absolute inset-x-0 bg-[#f4f4f4]"
-          style={{ top: "20.5%", bottom: "0" }}
+          className="absolute inset-x-0 bottom-0 top-[20.5%] bg-[#f4f4f4] transition-[top,background-color] duration-300 ease-out group-hover:top-[15.4%] group-hover:bg-[#d7d7d7]"
         />
         <img
           src={category.image}
           alt={category.name}
-          className="relative w-full h-full object-contain object-bottom transition-transform duration-300 group-hover:scale-[1.02]"
+          className="relative w-full h-full object-contain object-bottom"
           loading="lazy"
         />
       </div>
@@ -204,7 +203,7 @@ function CategoryCard({ category }: { category: CategoryTile }) {
         </div>
         <ArrowRight
           size={30}
-          className="text-black mt-[14px] flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+          className="text-black mt-[14px] flex-shrink-0 transition-[color,transform] duration-300 ease-out group-hover:text-cyan group-hover:translate-x-2"
         />
       </div>
     </Link>
