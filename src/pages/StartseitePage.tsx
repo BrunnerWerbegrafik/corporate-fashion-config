@@ -207,7 +207,7 @@ function CategoryCard({ category }: { category: CategoryTile }) {
           </h3>
           <ArrowRight
             size={30}
-            className="text-black flex-shrink-0 transition-[color,transform] duration-300 ease-out group-hover:text-cyan group-hover:translate-x-2"
+            className="text-black flex-shrink-0 transition-[color,transform] duration-300 ease-out group-hover:text-cyan group-hover:translate-x-5"
           />
         </div>
         <p className="mt-5 text-black text-[15px] leading-[1.4]" style={{ fontWeight: 300 }}>
