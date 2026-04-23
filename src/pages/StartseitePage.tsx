@@ -141,9 +141,17 @@ export function StartseitePage() {
         </div>
       </section>
 
-      {/* KATEGORIE-GRID 3×2 */}
+      {/* KATEGORIE-GRID 3×2 mit "Kategorien"-Label oben */}
       <section className="bg-white">
-        <div className="px-6 md:px-12 lg:px-[120px] py-16 lg:py-[120px]">
+        <div className="px-6 md:px-12 lg:px-[120px] pt-12 lg:pt-[40px] pb-16 lg:pb-[120px]">
+          {/* Section-Label "Kategorien": 40px-Linie + 20px Gap + Text in Avenir Light 20px,
+              entspricht Figma: Linie bei x=120 width:40, Text bei x=180 y=660. */}
+          <div className="flex items-center gap-5 mb-12 lg:mb-[80px]">
+            <span className="block w-[40px] h-px bg-black" aria-hidden="true" />
+            <span className="text-[20px] text-black leading-none" style={{ fontWeight: 300 }}>
+              Kategorien
+            </span>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[60px] gap-y-[80px]">
             {categories.map((cat) => (
               <CategoryCard key={cat.id} category={cat} />
