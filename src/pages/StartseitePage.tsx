@@ -87,18 +87,22 @@ export function StartseitePage() {
       {/* HERO – Headline freifließend, Bild absolut rechts dahinter */}
       <section className="relative bg-white border-b border-hairline overflow-hidden">
         <div className="relative" style={{ minHeight: "clamp(360px, 30vw, 540px)" }}>
-          {/* Hero-Bild rechts: grauer Backdrop ~56% Breite + PNG mit Modell */}
+          {/* Hero-Bild rechts: grauer Backdrop ~56% Breite + PNG mit Modell.
+              Endet 12.73% vor der Sektionsunterkante (Figma: 70px weißer Raum
+              zwischen Backdrop-Unterkante und unterer Hairline). */}
           <div
-            className="absolute top-0 bottom-0 right-0 z-0"
-            style={{ width: "56.25%" }}
+            className="absolute top-0 right-0 z-0"
+            style={{ width: "56.25%", bottom: "12.73%" }}
           >
             <div className="relative w-full h-full">
-              {/* Grauer Backdrop: beginnt 14.6% von oben (Figma: y=140 von 480 Höhe) */}
+              {/* Grauer Backdrop: beginnt 14.58% von oben innerhalb der Bild-Area
+                  (Figma: y=140 in einer 480px-hohen Bild-Area). */}
               <div
                 className="absolute inset-x-0 bg-[#f4f4f4]"
-                style={{ top: "14.6%", bottom: "0" }}
+                style={{ top: "14.58%", bottom: "0" }}
               />
-              {/* Modell-PNG: rechtsbündig, ragt nach oben über den Backdrop hinaus */}
+              {/* Modell-PNG: rechtsbündig, ragt nach oben über den Backdrop hinaus,
+                  Unterkante bündig mit Backdrop-Unterkante. */}
               <img
                 src="/images/titelbild-home.png"
                 alt="Corporate Fashion – Beispielmotiv"
@@ -109,8 +113,10 @@ export function StartseitePage() {
             </div>
           </div>
 
-          {/* Headline-Block vorne, links – overlappt das Bild */}
-          <div className="relative z-10 pl-6 md:pl-12 lg:pl-[120px] pt-16 pb-16 lg:pt-[150px] lg:pb-[100px] xl:pt-[170px] xl:pb-[120px]">
+          {/* Headline-Block vorne, links – Indent 180px ab lg (= 60px mehr als Logo bei 120px,
+              entspricht Figma: Logo left:120, Headline left:180). Dadurch endet "Fashion."
+              knapp vor dem grauen Backdrop, statt hineinzuragen. */}
+          <div className="relative z-10 pl-6 md:pl-12 lg:pl-[180px] pt-16 pb-16 lg:pt-[150px] lg:pb-[100px] xl:pt-[170px] xl:pb-[120px]">
             <h1
               className="text-cyan font-medium leading-[1.0] tracking-tight m-0 whitespace-nowrap text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
               style={{ fontWeight: 500 }}
