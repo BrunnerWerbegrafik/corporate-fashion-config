@@ -42,8 +42,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Avenir LT"', '"Helvetica Neue"', "Helvetica", "Arial", "sans-serif"],
-        italic: ['"Avenir Italic"', '"Avenir LT"', "italic", "sans-serif"],
+        sans: ['"Avenir"', '"Helvetica Neue"', "Helvetica", "Arial", "sans-serif"],
       },
       borderRadius: {
         s: "4px",

@@ -2,19 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Avenir – aus Avenir.ttc extrahiert (Light, Medium, Heavy).
+   Figma verwendet exakt diese drei Schnitte. */
 @font-face {
-  font-family: "Avenir LT";
-  src: url("/fonts/font.woff") format("woff");
-  font-weight: 300 900;
+  font-family: "Avenir";
+  src: url("/fonts/Avenir-Light.woff2") format("woff2");
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Avenir Italic";
-  src: url("/fonts/AvenirNextLTPro-It.otf") format("opentype");
-  font-weight: 400 700;
-  font-style: italic;
+  font-family: "Avenir";
+  src: url("/fonts/Avenir-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url("/fonts/Avenir-Heavy.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -24,8 +34,8 @@ html {
 
 body {
   margin: 0;
-  font-family: "Avenir LT", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 400;
+  font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -36,7 +46,6 @@ body {
 
 em,
 .italic-accent {
-  font-family: "Avenir Italic", "Avenir LT", italic, sans-serif;
   font-style: italic;
   font-weight: 500;
 }
@@ -76,7 +85,7 @@ em,
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .app-stage {
@@ -88,20 +97,12 @@ em,
   background: #0B1523;
 }
 
-/* Inneres Content-Limit, damit Text-Spalten auf Riesen-Monitoren nicht ausreiten */
-.content-inner {
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 :focus-visible {
   outline: 2px solid #009FE3;
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-/* Brunner Cyan-Glow oben links im dunklen Panel */
 .cyan-glow {
   position: absolute;
   top: -140px;

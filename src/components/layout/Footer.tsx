@@ -18,7 +18,7 @@ export function Footer({ theme: _theme }: FooterProps) {
         </Link>
         <nav
           className="flex items-center gap-12 text-[15px] font-light"
-          style={{ fontFamily: '"Avenir LT", sans-serif', fontWeight: 300 }}
+          style={{ fontFamily: '"Avenir", sans-serif', fontWeight: 300 }}
         >
           <Link to="/impressum" className="hover:opacity-70 transition-opacity">
             Impressum

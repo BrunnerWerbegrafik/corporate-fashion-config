@@ -18,7 +18,7 @@ export function CartBadge({ theme }: CartBadgeProps) {
     >
       <span
         className="font-light text-[15px] leading-none whitespace-nowrap"
-        style={{ fontFamily: '"Avenir LT", sans-serif', fontWeight: 300 }}
+        style={{ fontFamily: '"Avenir", sans-serif', fontWeight: 300 }}
       >
         Anfragekorb
       </span>
@@ -27,7 +27,7 @@ export function CartBadge({ theme }: CartBadgeProps) {
         className={`w-5 h-5 grid place-items-center bg-cyan text-white text-[13px] font-bold leading-none tabular-nums ${
           totalItems > 0 ? "animate-badge-pulse" : ""
         }`}
-        style={{ fontFamily: '"Avenir LT", sans-serif', fontWeight: 900 }}
+        style={{ fontFamily: '"Avenir", sans-serif', fontWeight: 900 }}
       >
         {totalItems}
       </span>

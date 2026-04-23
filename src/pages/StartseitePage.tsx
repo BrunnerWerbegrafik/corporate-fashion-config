@@ -84,44 +84,21 @@ function ArrowRight({ className = "", size = 30 }: { className?: string; size?: 
 export function StartseitePage() {
   return (
     <PageWrapper theme="light">
-      {/* HERO – linke Headline-Spalte mit 180px Indent, rechte Bild-Spalte bleedet zur Browser-Kante */}
+      {/* HERO – Headline freifließend, Bild absolut rechts dahinter */}
       <section className="relative bg-white border-b border-hairline overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-[660fr_1080fr] items-stretch min-h-[420px] lg:min-h-[480px]">
-          {/* Headline links */}
-          <div className="px-6 md:px-12 lg:pl-[180px] lg:pr-12 py-16 lg:py-0 flex flex-col justify-center">
-            <h1
-              className="text-cyan font-medium leading-[1.0] tracking-tight m-0 text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
-              style={{
-                fontFamily: '"Avenir LT", sans-serif',
-                fontWeight: 500,
-              }}
-            >
-              Corporate Fashion.
-            </h1>
-            <div className="mt-3 flex items-center gap-6">
-              <p
-                className="text-black m-0 text-[24px] sm:text-[32px] md:text-[42px] lg:text-[46px] xl:text-[50px]"
-                style={{
-                  fontFamily: '"Avenir LT", sans-serif',
-                  fontWeight: 300,
-                  lineHeight: 1,
-                }}
-              >
-                Made easy.
-              </p>
-              <ArrowRight size={40} className="text-black" />
-            </div>
-          </div>
-
-          {/* Hero-Bild rechts mit grauem Backdrop – läuft bis zur Browser-Kante */}
-          <div className="relative">
-            <div className="relative w-full" style={{ aspectRatio: "1080 / 480" }}>
-              {/* Grauer Backdrop: volle Spalten-Breite, beginnt bei 14.6% von oben */}
+        <div className="relative" style={{ minHeight: "clamp(360px, 30vw, 540px)" }}>
+          {/* Hero-Bild rechts: grauer Backdrop ~56% Breite + PNG mit Modell */}
+          <div
+            className="absolute top-0 bottom-0 right-0 z-0"
+            style={{ width: "56.25%" }}
+          >
+            <div className="relative w-full h-full">
+              {/* Grauer Backdrop: beginnt 14.6% von oben (Figma: y=140 von 480 Höhe) */}
               <div
                 className="absolute inset-x-0 bg-[#f4f4f4]"
                 style={{ top: "14.6%", bottom: "0" }}
               />
-              {/* Bild: 720/1080 = 66.67% breit, rechtsbündig, volle Höhe */}
+              {/* Modell-PNG: rechtsbündig, ragt nach oben über den Backdrop hinaus */}
               <img
                 src="/images/titelbild-home.png"
                 alt="Corporate Fashion – Beispielmotiv"
@@ -131,12 +108,31 @@ export function StartseitePage() {
               />
             </div>
           </div>
+
+          {/* Headline-Block vorne, links – overlappt das Bild */}
+          <div className="relative z-10 pl-6 md:pl-12 lg:pl-[120px] pt-16 pb-16 lg:pt-[150px] lg:pb-[100px] xl:pt-[170px] xl:pb-[120px]">
+            <h1
+              className="text-cyan font-medium leading-[1.0] tracking-tight m-0 whitespace-nowrap text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
+              style={{ fontWeight: 500 }}
+            >
+              Corporate Fashion.
+            </h1>
+            <div className="mt-3 flex items-center gap-6">
+              <p
+                className="text-black m-0 whitespace-nowrap text-[24px] sm:text-[32px] md:text-[42px] lg:text-[46px] xl:text-[50px]"
+                style={{ fontWeight: 300, lineHeight: 1 }}
+              >
+                Made easy.
+              </p>
+              <ArrowRight size={40} className="text-black" />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* KATEGORIE-GRID 3×2 */}
       <section className="bg-white">
-        <div className="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-[120px] py-16 lg:py-[120px]">
+        <div className="px-6 md:px-12 lg:px-[120px] py-16 lg:py-[120px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[60px] gap-y-[80px]">
             {categories.map((cat) => (
               <CategoryCard key={cat.id} category={cat} />
@@ -168,44 +164,29 @@ function CategoryCard({ category }: { category: CategoryTile }) {
         />
       </div>
 
-      {/* Caption */}
-      <div className="mt-7 flex items-start justify-between gap-6 pl-[30px] pr-[30px]">
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-3 mb-3">
-            <span
-              className="text-[15px] text-black"
-              style={{ fontFamily: '"Avenir LT", sans-serif', fontWeight: 300 }}
-            >
-              {category.index}
-            </span>
-            <span className="block w-[30px] h-px bg-black" aria-hidden="true" />
-          </div>
+      {/* Caption: Nummer + Linie, dann Titel + Pfeil in einer Zeile, dann Beschreibung */}
+      <div className="mt-7">
+        <div className="flex items-center gap-3 mb-3">
+          <span className="text-[15px] text-black" style={{ fontWeight: 300 }}>
+            {category.index}
+          </span>
+          <span className="block w-[30px] h-px bg-black" aria-hidden="true" />
+        </div>
+        <div className="flex items-center justify-between gap-6">
           <h3
-            className="text-cyan m-0 leading-none"
-            style={{
-              fontFamily: '"Avenir LT", sans-serif',
-              fontWeight: 500,
-              fontSize: "clamp(28px, 2.6vw, 40px)",
-            }}
+            className="text-cyan m-0 leading-none text-[28px] sm:text-[32px] lg:text-[36px] xl:text-[40px]"
+            style={{ fontWeight: 500 }}
           >
             {category.name}
           </h3>
-          <p
-            className="mt-5 text-black"
-            style={{
-              fontFamily: '"Avenir LT", sans-serif',
-              fontWeight: 300,
-              fontSize: "15px",
-              lineHeight: 1.4,
-            }}
-          >
-            {category.description}
-          </p>
+          <ArrowRight
+            size={30}
+            className="text-black flex-shrink-0 transition-[color,transform] duration-300 ease-out group-hover:text-cyan group-hover:translate-x-2"
+          />
         </div>
-        <ArrowRight
-          size={30}
-          className="text-black mt-[14px] flex-shrink-0 transition-[color,transform] duration-300 ease-out group-hover:text-cyan group-hover:translate-x-2"
-        />
+        <p className="mt-5 text-black text-[15px] leading-[1.4]" style={{ fontWeight: 300 }}>
+          {category.description}
+        </p>
       </div>
     </Link>
   );
