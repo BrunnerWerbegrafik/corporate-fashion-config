@@ -84,28 +84,26 @@ function ArrowRight({ className = "", size = 30 }: { className?: string; size?: 
 export function StartseitePage() {
   return (
     <PageWrapper theme="light">
-      {/* HERO */}
-      <section className="relative bg-white border-b border-hairline">
-        <div className="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-[120px] pt-16 lg:pt-[170px] pb-16 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      {/* HERO – linke Headline-Spalte mit 180px Indent, rechte Bild-Spalte bleedet zur Browser-Kante */}
+      <section className="relative bg-white border-b border-hairline overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-[660fr_1080fr] items-stretch min-h-[420px] lg:min-h-[480px]">
           {/* Headline links */}
-          <div className="lg:col-span-7">
+          <div className="px-6 md:px-12 lg:pl-[180px] lg:pr-12 py-16 lg:py-0 flex flex-col justify-center">
             <h1
-              className="text-cyan font-medium leading-[1.0] tracking-tight m-0"
+              className="text-cyan font-medium leading-[1.0] tracking-tight m-0 text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
               style={{
                 fontFamily: '"Avenir LT", sans-serif',
                 fontWeight: 500,
-                fontSize: "clamp(48px, 6.5vw, 100px)",
               }}
             >
               Corporate Fashion.
             </h1>
             <div className="mt-3 flex items-center gap-6">
               <p
-                className="text-black m-0"
+                className="text-black m-0 text-[24px] sm:text-[32px] md:text-[42px] lg:text-[46px] xl:text-[50px]"
                 style={{
                   fontFamily: '"Avenir LT", sans-serif',
                   fontWeight: 300,
-                  fontSize: "clamp(28px, 3.2vw, 50px)",
                   lineHeight: 1,
                 }}
               >
@@ -115,17 +113,20 @@ export function StartseitePage() {
             </div>
           </div>
 
-          {/* Hero-Bild rechts mit grauem Backdrop */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[720/480] w-full">
+          {/* Hero-Bild rechts mit grauem Backdrop – läuft bis zur Browser-Kante */}
+          <div className="relative">
+            <div className="relative w-full" style={{ aspectRatio: "1080 / 480" }}>
+              {/* Grauer Backdrop: volle Spalten-Breite, beginnt bei 14.6% von oben */}
               <div
-                className="absolute right-0 bg-[#f4f4f4]"
-                style={{ top: "14.6%", left: "0%", bottom: "0%" }}
+                className="absolute inset-x-0 bg-[#f4f4f4]"
+                style={{ top: "14.6%", bottom: "0" }}
               />
+              {/* Bild: 720/1080 = 66.67% breit, rechtsbündig, volle Höhe */}
               <img
                 src="/images/titelbild-home.png"
                 alt="Corporate Fashion – Beispielmotiv"
-                className="absolute inset-0 w-full h-full object-contain object-bottom"
+                className="absolute right-0 top-0 h-full object-contain object-bottom"
+                style={{ width: "66.67%" }}
                 loading="eager"
               />
             </div>
@@ -162,7 +163,7 @@ function CategoryCard({ category }: { category: CategoryTile }) {
         <img
           src={category.image}
           alt={category.name}
-          className="relative w-full h-full object-contain object-bottom transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+          className="relative w-full h-full object-contain object-bottom transition-transform duration-300 ease-out group-hover:scale-[1.04]"
           loading="lazy"
         />
       </div>
