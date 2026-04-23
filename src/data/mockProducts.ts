@@ -1,19 +1,19 @@
 import type { Product, ColorVariant } from "../types/models";
 
 const demoImages1 = [
-  "/images/produkte/produkt-demo-1-front.jpg",
-  "/images/produkte/produkt-demo-1-back.jpg",
-  "/images/produkte/produkt-demo-1-detail.jpg",
+  "/images/produkte/produkt-demo-1-front.webp",
+  "/images/produkte/produkt-demo-1-back.webp",
+  "/images/produkte/produkt-demo-1-detail.webp",
 ];
 const demoImages2 = [
-  "/images/produkte/produkt-demo-2-front.jpg",
-  "/images/produkte/produkt-demo-2-back.jpg",
-  "/images/produkte/produkt-demo-2-detail.jpg",
+  "/images/produkte/produkt-demo-2-front.webp",
+  "/images/produkte/produkt-demo-2-back.webp",
+  "/images/produkte/produkt-demo-2-detail.webp",
 ];
 const demoImages3 = [
-  "/images/produkte/produkt-demo-3-front.jpg",
-  "/images/produkte/produkt-demo-3-back.jpg",
-  "/images/produkte/produkt-demo-3-detail.jpg",
+  "/images/produkte/produkt-demo-3-front.webp",
+  "/images/produkte/produkt-demo-3-back.webp",
+  "/images/produkte/produkt-demo-3-detail.webp",
 ];
 
 const colors = (sets: string[][]): ColorVariant[] => [

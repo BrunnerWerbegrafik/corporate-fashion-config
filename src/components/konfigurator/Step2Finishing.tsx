@@ -17,14 +17,14 @@ const mainOptions: {
     id: "druck",
     title: "Druck",
     subtitle: "Brillante Farben, große Flächen, schnelle Umsetzung.",
-    image: "/images/veredelungen/veredelung-druck-hauptbild.jpg",
+    image: "/images/veredelungen/veredelung-druck-hauptbild.webp",
     capsLabel: "Mögliche Druckverfahren",
   },
   {
     id: "stick",
     title: "Stick",
     subtitle: "Hochwertig, langlebig, edel – der Klassiker für Polos und Caps.",
-    image: "/images/veredelungen/veredelung-stick-hauptbild.jpg",
+    image: "/images/veredelungen/veredelung-stick-hauptbild.webp",
     capsLabel: "Mögliche Stick-Arten",
   },
 ];

@@ -16,7 +16,7 @@ const categories: CategoryTile[] = [
     index: "01",
     name: "T-Shirts",
     description: "Der Klassiker für Team und Auftritt.",
-    image: "/images/kategorien-neu/tshirts.png",
+    image: "/images/kategorien-neu/tshirts.webp",
     href: "/textilart/tshirts",
   },
   {
@@ -24,7 +24,7 @@ const categories: CategoryTile[] = [
     index: "02",
     name: "Polos",
     description: "Edler Auftritt für Service und Vertrieb.",
-    image: "/images/kategorien-neu/polos.png",
+    image: "/images/kategorien-neu/polos.webp",
     href: "/textilart/polos",
   },
   {
@@ -32,7 +32,7 @@ const categories: CategoryTile[] = [
     index: "03",
     name: "Hemden",
     description: "Klassisch, repräsentativ, gepflegt.",
-    image: "/images/kategorien-neu/hemden.png",
+    image: "/images/kategorien-neu/hemden.webp",
     href: "/textilart/hemden",
   },
   {
@@ -40,7 +40,7 @@ const categories: CategoryTile[] = [
     index: "04",
     name: "Sweatshirts",
     description: "Bequem und lässig – inkl. Hoodies.",
-    image: "/images/kategorien-neu/sweatshirts.png",
+    image: "/images/kategorien-neu/sweatshirts.webp",
     href: "/textilart/sweatshirts",
   },
   {
@@ -48,7 +48,7 @@ const categories: CategoryTile[] = [
     index: "05",
     name: "Outerwear",
     description: "Jacken und Westen für jedes Wetter.",
-    image: "/images/kategorien-neu/outerwear.png",
+    image: "/images/kategorien-neu/outerwear.webp",
     href: "/textilart/outerwear",
   },
   {
@@ -56,7 +56,7 @@ const categories: CategoryTile[] = [
     index: "06",
     name: "Accessoires",
     description: "Caps, Mützen, Handtücher und mehr.",
-    image: "/images/kategorien-neu/accessoires.png",
+    image: "/images/kategorien-neu/accessoires.webp",
     href: "/textilart/accessoires",
   },
 ];
@@ -104,7 +104,7 @@ export function StartseitePage() {
               {/* Modell-PNG: rechtsbündig, ragt nach oben über den Backdrop hinaus,
                   Unterkante bündig mit Backdrop-Unterkante. */}
               <img
-                src="/images/titelbild-home.png"
+                src="/images/titelbild-home.webp"
                 alt="Corporate Fashion – Beispielmotiv"
                 className="absolute right-0 top-0 h-full object-contain object-bottom"
                 style={{ width: "66.67%" }}
@@ -121,7 +121,7 @@ export function StartseitePage() {
               className="bg-clip-text text-transparent bg-cover bg-center bg-no-repeat font-medium leading-[1.0] tracking-tight m-0 whitespace-nowrap text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
               style={{
                 fontWeight: 500,
-                backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau3.jpg")',
+                backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau.webp")',
                 WebkitBackgroundClip: "text",
                 color: "transparent",
               }}
@@ -175,8 +175,10 @@ function CategoryCard({ category }: { category: CategoryTile }) {
         />
       </div>
 
-      {/* Caption: Nummer + Linie, dann Titel + Pfeil in einer Zeile, dann Beschreibung */}
-      <div className="mt-7">
+      {/* Caption: Nummer + Linie, dann Titel + Pfeil in einer Zeile, dann Beschreibung.
+          Indent 30px links + 50px rechts laut Figma (Bild left:120, "01"/Titel left:150,
+          Pfeil-Box endet 50px vor Bild-Rechtskante). */}
+      <div className="mt-7 pl-[30px] pr-[50px]">
         <div className="flex items-center gap-3 mb-3">
           <span className="text-[15px] text-black" style={{ fontWeight: 300 }}>
             {category.index}
@@ -188,7 +190,7 @@ function CategoryCard({ category }: { category: CategoryTile }) {
             className="bg-clip-text text-transparent bg-cover bg-center bg-no-repeat m-0 leading-none text-[28px] sm:text-[32px] lg:text-[36px] xl:text-[40px]"
             style={{
               fontWeight: 500,
-              backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau3.jpg")',
+              backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau.webp")',
               WebkitBackgroundClip: "text",
               color: "transparent",
             }}
