@@ -162,7 +162,7 @@ function CategoryCard({ category }: { category: CategoryTile }) {
         <img
           src={category.image}
           alt={category.name}
-          className="relative w-full h-full object-contain object-bottom"
+          className="relative w-full h-full object-contain object-bottom transition-transform duration-300 ease-out group-hover:scale-[1.02]"
           loading="lazy"
         />
       </div>
