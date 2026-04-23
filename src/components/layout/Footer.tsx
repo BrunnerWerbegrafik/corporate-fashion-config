@@ -4,50 +4,30 @@ interface FooterProps {
   theme: "light" | "dark";
 }
 
-export function Footer({ theme }: FooterProps) {
-  const isDark = theme === "dark";
-  const wrapper = isDark
-    ? "bg-dk-0 text-dk-muted border-t border-dk-line"
-    : "bg-white text-muted border-t border-hairline";
-  const linkHover = isDark ? "hover:text-cyan" : "hover:text-cyan";
-  const strongClass = isDark ? "text-white font-medium" : "text-ink font-medium";
-
+export function Footer({ theme: _theme }: FooterProps) {
+  // Footer ist laut Figma-Design immer dunkel (#031a22), unabhängig von der Seiten-Welt.
   return (
-    <footer className={`w-full mt-auto ${wrapper}`}>
-      <div className="px-6 md:px-12 lg:px-[72px] py-9 flex flex-col md:flex-row gap-6 md:gap-12 md:items-end justify-between text-[13px] leading-relaxed">
-        <div>
-          <strong className={`block mb-0.5 ${strongClass}`}>Brunner Werbegrafik OHG</strong>
-          Lagerhausstraße 8 · 83109 Großkarolinenfeld
-        </div>
-        <nav className="flex flex-wrap items-center">
-          <Link to="/impressum" className={`transition-colors ${linkHover}`}>
+    <footer className="w-full mt-auto bg-[#031a22] text-white">
+      <div className="h-[110px] px-6 md:px-12 lg:px-[120px] flex items-center justify-between">
+        <Link to="/" aria-label="Brunner Corporate Fashion" className="block">
+          <img
+            src="/images/logo-cf-negativ.svg"
+            alt="Brunner Corporate Fashion"
+            className="h-5 w-auto block"
+          />
+        </Link>
+        <nav
+          className="flex items-center gap-12 text-[15px] font-light"
+          style={{ fontFamily: '"Avenir LT", sans-serif', fontWeight: 300 }}
+        >
+          <Link to="/impressum" className="hover:opacity-70 transition-opacity">
             Impressum
           </Link>
-          <Dot />
-          <Link to="/datenschutz" className={`transition-colors ${linkHover}`}>
+          <Link to="/datenschutz" className="hover:opacity-70 transition-opacity">
             Datenschutz
           </Link>
-          <Dot />
-          <Link to="/agb" className={`transition-colors ${linkHover}`}>
-            AGB
-          </Link>
-          <Dot />
-          <a
-            href="https://www.brunner-werbegrafik.de/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`transition-colors ${linkHover}`}
-          >
-            Hauptseite
-          </a>
         </nav>
       </div>
     </footer>
-  );
-}
-
-function Dot() {
-  return (
-    <span className="inline-block w-[3px] h-[3px] rounded-full bg-current mx-2.5 align-middle opacity-55" />
   );
 }
