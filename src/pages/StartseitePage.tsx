@@ -118,8 +118,13 @@ export function StartseitePage() {
               knapp vor dem grauen Backdrop, statt hineinzuragen. */}
           <div className="relative z-10 pl-6 md:pl-12 lg:pl-[180px] pt-16 pb-16 lg:pt-[150px] lg:pb-[100px] xl:pt-[170px] xl:pb-[120px]">
             <h1
-              className="text-cyan font-medium leading-[1.0] tracking-tight m-0 whitespace-nowrap text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
-              style={{ fontWeight: 500 }}
+              className="bg-clip-text text-transparent bg-cover bg-center bg-no-repeat font-medium leading-[1.0] tracking-tight m-0 whitespace-nowrap text-[44px] sm:text-[60px] md:text-[80px] lg:text-[88px] xl:text-[100px]"
+              style={{
+                fontWeight: 500,
+                backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau3.jpg")',
+                WebkitBackgroundClip: "text",
+                color: "transparent",
+              }}
             >
               Corporate Fashion.
             </h1>
@@ -180,8 +185,13 @@ function CategoryCard({ category }: { category: CategoryTile }) {
         </div>
         <div className="flex items-center justify-between gap-6">
           <h3
-            className="text-cyan m-0 leading-none text-[28px] sm:text-[32px] lg:text-[36px] xl:text-[40px]"
-            style={{ fontWeight: 500 }}
+            className="bg-clip-text text-transparent bg-cover bg-center bg-no-repeat m-0 leading-none text-[28px] sm:text-[32px] lg:text-[36px] xl:text-[40px]"
+            style={{
+              fontWeight: 500,
+              backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau3.jpg")',
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
           >
             {category.name}
           </h3>
