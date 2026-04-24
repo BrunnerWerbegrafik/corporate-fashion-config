@@ -34,10 +34,10 @@ export function ProgressBar({ totalSteps, currentStep, labels = [], onJump }: Pr
             <div
               className={`w-[50px] h-[50px] rounded-full grid place-items-center text-[15px] font-medium tabular-nums transition-all duration-200 ${
                 active
-                  ? "bg-gradient-to-br from-[rgba(0,159,227,0.9)] to-[rgba(0,90,128,0.9)] border border-cyan/40 text-white"
+                  ? "bg-gradient-to-r from-[rgba(0,159,227,0.8)] to-[rgba(0,90,128,0.8)] border border-cyan/30 text-white"
                   : done
                   ? "bg-transparent border border-cyan text-cyan"
-                  : "bg-white/[0.03] border border-white/15 text-white/80"
+                  : "bg-white/[0.04] border border-white/20 text-white/80"
               }`}
             >
               {done ? <CheckIcon size={16} /> : step}

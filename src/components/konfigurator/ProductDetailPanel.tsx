@@ -104,9 +104,9 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
         role="dialog"
         aria-label={`${product.name} konfigurieren`}
       >
-        {/* Top-Bar: Stepper über volle Breite + X ganz rechts */}
+        {/* Top-Bar: Stepper + X ganz rechts */}
         <div className="relative z-10 border-b border-white/10">
-          <div className="pt-[30px] pb-[32px] px-16 lg:px-24 xl:px-32">
+          <div className="pt-[30px] pb-[32px] pl-[90px] pr-[220px]">
             <ProgressBar
               totalSteps={4}
               currentStep={step}
@@ -118,7 +118,7 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
             type="button"
             onClick={onClose}
             aria-label="Schließen"
-            className="absolute right-8 top-[35px] w-10 h-10 grid place-items-center text-white/80 hover:text-white transition-colors cursor-pointer"
+            className="absolute right-[80px] top-[35px] w-10 h-10 grid place-items-center text-white/80 hover:text-white transition-colors cursor-pointer"
           >
             <CloseIcon size={28} />
           </button>

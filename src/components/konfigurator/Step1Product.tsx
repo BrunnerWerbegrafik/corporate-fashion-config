@@ -45,15 +45,15 @@ export function Step1Product({
   const smallImages = [images[1], images[2]].filter(Boolean) as string[];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[840fr_520fr] gap-12 lg:gap-20 px-10 lg:px-14 pt-[80px] pb-16">
+    <div className="grid grid-cols-1 lg:grid-cols-[840fr_520fr] gap-10 lg:gap-x-[80px] lg:gap-y-10 pt-[80px] pb-[80px] max-w-[1440px]">
       {/* LINKS: Bilder */}
       <div className="flex flex-col gap-10">
-        {/* Hauptbild: Backdrop 840×600, darin quadratisches Bild zentriert */}
-        <div className="relative aspect-[840/600] bg-white/[0.05] overflow-hidden">
+        {/* Hauptbild: 840×600 Backdrop, PNG über volle Höhe zentriert */}
+        <div className="relative aspect-[840/600] bg-white/[0.05] overflow-hidden flex items-end justify-center">
           <img
             src={mainImage}
             alt={`${product.name} – Vorderseite`}
-            className="absolute left-1/2 top-0 -translate-x-1/2 h-full aspect-square object-contain object-bottom"
+            className="max-h-full w-auto object-contain"
           />
         </div>
 
@@ -61,11 +61,14 @@ export function Step1Product({
         {smallImages.length > 0 && (
           <div className="grid gap-10" style={{ gridTemplateColumns: "460fr 340fr" }}>
             {smallImages.map((img, i) => (
-              <div key={img + i} className="aspect-square bg-white/[0.05] overflow-hidden">
+              <div
+                key={img + i}
+                className="relative aspect-square bg-white/[0.05] overflow-hidden flex items-end justify-center"
+              >
                 <img
                   src={img}
                   alt={`${product.name} – ${i === 0 ? "Rückseite" : "Detail"}`}
-                  className="w-full h-full object-contain object-bottom"
+                  className="max-h-full w-auto object-contain"
                 />
               </div>
             ))}
@@ -97,11 +100,11 @@ export function Step1Product({
         </p>
 
         {/* Specs als Pills */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-[10px] mb-10">
           {pills.map((p) => (
             <span
               key={p}
-              className="inline-flex items-center px-[14px] h-[28px] rounded-full bg-white/[0.06] text-[13px] text-white whitespace-nowrap"
+              className="inline-flex items-center px-[14px] h-[28px] rounded-full bg-white/[0.05] text-[13px] text-white whitespace-nowrap"
               style={{ fontWeight: 300 }}
             >
               {p}
@@ -110,7 +113,7 @@ export function Step1Product({
         </div>
 
         {/* Farbwahl */}
-        <div className="flex flex-col gap-5 mb-14">
+        <div className="flex flex-col gap-5 mb-[60px]">
           <div className="text-[15px] text-white">
             <span style={{ fontWeight: 500 }}>Farbe:</span>{" "}
             <span style={{ fontWeight: 300 }}>{variant?.name ?? "—"}</span>
@@ -127,8 +130,8 @@ export function Step1Product({
           </div>
         </div>
 
-        {/* Menge (140×47) + CTA (360×47) */}
-        <div className="flex flex-wrap items-center gap-3">
+        {/* Menge (140×47) + CTA (360×47) mit 20px Gap */}
+        <div className="flex flex-wrap items-center gap-5">
           <div className="inline-flex items-center justify-between h-[47px] w-[140px] px-5 rounded-full bg-white/[0.05]">
             <button
               type="button"
@@ -155,7 +158,7 @@ export function Step1Product({
             type="button"
             onClick={onNext}
             disabled={!canProceed}
-            className="inline-flex items-center justify-between h-[47px] w-[360px] px-10 rounded-full bg-gradient-to-r from-[rgba(0,159,227,0.9)] to-[rgba(0,90,128,0.9)] text-white text-[17px] transition-all hover:from-cyan hover:to-[#005A80] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="inline-flex items-center justify-between h-[47px] w-[360px] px-10 rounded-full bg-gradient-to-r from-[rgba(0,159,227,0.8)] to-[rgba(0,90,128,0.8)] text-white text-[17px] transition-all hover:from-cyan hover:to-[#005A80] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             style={{ fontWeight: 500 }}
           >
             Veredelung auswählen
