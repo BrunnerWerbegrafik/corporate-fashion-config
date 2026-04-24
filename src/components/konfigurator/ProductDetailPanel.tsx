@@ -27,7 +27,7 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
   const { addEntry } = useCart();
   const [step, setStep] = useState<Step>(1);
   const [colorId, setColorId] = useState(product.colorVariants[0]?.id ?? "");
-  const [quantity, setQuantity] = useState(Math.max(25, product.minQuantity));
+  const [quantity, setQuantity] = useState(Math.max(10, product.minQuantity));
   const [finishing, setFinishing] = useState<FinishingMainType | null>(null);
   const [selectedPositions, setSelectedPositions] = useState<string[]>([]);
   const [positionNote, setPositionNote] = useState("");
@@ -104,26 +104,24 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
         role="dialog"
         aria-label={`${product.name} konfigurieren`}
       >
-        {/* Top-Bar: Stepper + Schließen */}
+        {/* Top-Bar: Stepper über volle Breite + X ganz rechts */}
         <div className="relative z-10 border-b border-white/10">
-          <div className="flex items-start gap-6 px-8 lg:px-12 pt-7 pb-6">
-            <div className="flex-1 max-w-[1200px] mx-auto w-full">
-              <ProgressBar
-                totalSteps={4}
-                currentStep={step}
-                labels={STEP_LABELS}
-                onJump={(s) => setStep(s as Step)}
-              />
-            </div>
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Schließen"
-              className="mt-2 w-10 h-10 grid place-items-center text-white/80 hover:text-white transition-colors cursor-pointer"
-            >
-              <CloseIcon size={22} />
-            </button>
+          <div className="pt-[30px] pb-[32px] px-16 lg:px-24 xl:px-32">
+            <ProgressBar
+              totalSteps={4}
+              currentStep={step}
+              labels={STEP_LABELS}
+              onJump={(s) => setStep(s as Step)}
+            />
           </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Schließen"
+            className="absolute right-8 top-[35px] w-10 h-10 grid place-items-center text-white/80 hover:text-white transition-colors cursor-pointer"
+          >
+            <CloseIcon size={28} />
+          </button>
         </div>
 
         {/* Body */}

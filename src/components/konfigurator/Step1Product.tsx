@@ -45,24 +45,27 @@ export function Step1Product({
   const smallImages = [images[1], images[2]].filter(Boolean) as string[];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 px-10 lg:px-14 py-10">
+    <div className="grid grid-cols-1 lg:grid-cols-[840fr_520fr] gap-12 lg:gap-20 px-10 lg:px-14 pt-[80px] pb-16">
       {/* LINKS: Bilder */}
-      <div className="flex flex-col gap-5">
-        <div className="aspect-square bg-white/[0.05] overflow-hidden">
+      <div className="flex flex-col gap-10">
+        {/* Hauptbild: Backdrop 840×600, darin quadratisches Bild zentriert */}
+        <div className="relative aspect-[840/600] bg-white/[0.05] overflow-hidden">
           <img
             src={mainImage}
             alt={`${product.name} – Vorderseite`}
-            className="w-full h-full object-cover"
+            className="absolute left-1/2 top-0 -translate-x-1/2 h-full aspect-square object-contain object-bottom"
           />
         </div>
+
+        {/* Zwei Detailbilder: 460 vs 340 breit, 40px gap */}
         {smallImages.length > 0 && (
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid gap-10" style={{ gridTemplateColumns: "460fr 340fr" }}>
             {smallImages.map((img, i) => (
               <div key={img + i} className="aspect-square bg-white/[0.05] overflow-hidden">
                 <img
                   src={img}
                   alt={`${product.name} – ${i === 0 ? "Rückseite" : "Detail"}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain object-bottom"
                 />
               </div>
             ))}
@@ -71,10 +74,10 @@ export function Step1Product({
       </div>
 
       {/* RECHTS: Produkt-Info */}
-      <div className="flex flex-col gap-6 max-w-[640px]">
-        {/* Eyebrow */}
+      <div className="flex flex-col pt-10 max-w-[640px]">
+        {/* Eyebrow mit Cyan-Linie */}
         {qualityLevel && (
-          <div className="flex items-center gap-3 text-[15px] text-white" style={{ fontWeight: 300 }}>
+          <div className="flex items-center gap-3 text-[15px] text-white mb-3" style={{ fontWeight: 300 }}>
             <span>{qualityLevel.name} Collection</span>
             <span className="h-px w-[30px] bg-cyan" aria-hidden="true" />
           </div>
@@ -82,23 +85,23 @@ export function Step1Product({
 
         {/* Titel */}
         <h2
-          className="text-[36px] md:text-[40px] leading-[1.05] m-0 text-cyan"
+          className="text-[40px] leading-[1.05] m-0 text-cyan mb-6"
           style={{ fontWeight: 500 }}
         >
           {product.name}
         </h2>
 
         {/* Beschreibung */}
-        <p className="text-[15px] leading-[1.5] text-white m-0" style={{ fontWeight: 300 }}>
+        <p className="text-[15px] leading-[1.5] text-white m-0 mb-9" style={{ fontWeight: 300 }}>
           {product.longDescription}
         </p>
 
         {/* Specs als Pills */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-10">
           {pills.map((p) => (
             <span
               key={p}
-              className="inline-flex items-center px-[14px] h-[28px] rounded-full bg-white/[0.06] text-[13px] text-white"
+              className="inline-flex items-center px-[14px] h-[28px] rounded-full bg-white/[0.06] text-[13px] text-white whitespace-nowrap"
               style={{ fontWeight: 300 }}
             >
               {p}
@@ -107,7 +110,7 @@ export function Step1Product({
         </div>
 
         {/* Farbwahl */}
-        <div className="flex flex-col gap-3 mt-2">
+        <div className="flex flex-col gap-5 mb-14">
           <div className="text-[15px] text-white">
             <span style={{ fontWeight: 500 }}>Farbe:</span>{" "}
             <span style={{ fontWeight: 300 }}>{variant?.name ?? "—"}</span>
@@ -124,18 +127,18 @@ export function Step1Product({
           </div>
         </div>
 
-        {/* Menge + CTA */}
-        <div className="flex flex-wrap items-center gap-3 mt-4">
-          <div className="inline-flex items-center gap-4 h-[47px] px-5 rounded-full bg-white/[0.06]">
+        {/* Menge (140×47) + CTA (360×47) */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="inline-flex items-center justify-between h-[47px] w-[140px] px-5 rounded-full bg-white/[0.05]">
             <button
               type="button"
               aria-label="Weniger"
               onClick={() => onQuantity(Math.max(product.minQuantity, quantity - 1))}
               className="text-white/80 hover:text-cyan transition-colors cursor-pointer"
             >
-              <MinusIcon size={16} />
+              <MinusIcon size={18} />
             </button>
-            <span className="min-w-[40px] text-center text-[17px] tabular-nums text-white" style={{ fontWeight: 300 }}>
+            <span className="text-[17px] tabular-nums text-white" style={{ fontWeight: 300 }}>
               {quantity}
             </span>
             <button
@@ -144,7 +147,7 @@ export function Step1Product({
               onClick={() => onQuantity(quantity + 1)}
               className="text-white/80 hover:text-cyan transition-colors cursor-pointer"
             >
-              <PlusIcon size={16} />
+              <PlusIcon size={18} />
             </button>
           </div>
 
@@ -152,16 +155,12 @@ export function Step1Product({
             type="button"
             onClick={onNext}
             disabled={!canProceed}
-            className="inline-flex items-center justify-between gap-6 h-[47px] pl-8 pr-6 rounded-full bg-gradient-to-r from-[rgba(0,159,227,0.9)] to-[rgba(0,90,128,0.9)] text-white text-[17px] transition-all hover:from-cyan hover:to-[#005A80] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="inline-flex items-center justify-between h-[47px] w-[360px] px-10 rounded-full bg-gradient-to-r from-[rgba(0,159,227,0.9)] to-[rgba(0,90,128,0.9)] text-white text-[17px] transition-all hover:from-cyan hover:to-[#005A80] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             style={{ fontWeight: 500 }}
           >
             Veredelung auswählen
-            <ArrowRightIcon size={16} />
+            <ArrowRightIcon size={18} />
           </button>
-        </div>
-
-        <div className="italic text-[12px] text-white/50 mt-1">
-          Mindestabnahme: {product.minQuantity} Stück · Größen klären wir gemeinsam.
         </div>
       </div>
     </div>

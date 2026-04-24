@@ -26,7 +26,7 @@ export function ProgressBar({ totalSteps, currentStep, labels = [], onJump }: Pr
             type="button"
             disabled={!canJump}
             onClick={() => canJump && onJump?.(step)}
-            className={`flex flex-col items-center gap-2 relative z-[1] ${
+            className={`flex flex-col items-center gap-[13px] relative z-[1] ${
               canJump ? "cursor-pointer" : "cursor-default"
             }`}
             aria-label={`Schritt ${step}${meta ? `: ${meta.label}` : ""}`}
@@ -34,19 +34,17 @@ export function ProgressBar({ totalSteps, currentStep, labels = [], onJump }: Pr
             <div
               className={`w-[50px] h-[50px] rounded-full grid place-items-center text-[15px] font-medium tabular-nums transition-all duration-200 ${
                 active
-                  ? "bg-gradient-to-br from-[rgba(0,159,227,0.9)] to-[rgba(0,90,128,0.9)] border border-cyan/60 text-white shadow-[0_0_0_5px_rgba(0,159,227,0.14)]"
+                  ? "bg-gradient-to-br from-[rgba(0,159,227,0.9)] to-[rgba(0,90,128,0.9)] border border-cyan/40 text-white"
                   : done
                   ? "bg-transparent border border-cyan text-cyan"
-                  : "bg-transparent border border-white/20 text-white/70"
+                  : "bg-white/[0.03] border border-white/15 text-white/80"
               }`}
             >
               {done ? <CheckIcon size={16} /> : step}
             </div>
             {meta && (
               <div
-                className={`text-[13px] text-center transition-colors leading-tight ${
-                  active ? "text-white" : "text-white/70"
-                }`}
+                className="text-[15px] text-center text-white leading-tight"
                 style={{ fontWeight: 300 }}
               >
                 {meta.label}
