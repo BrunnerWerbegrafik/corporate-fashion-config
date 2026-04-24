@@ -9,7 +9,6 @@ import { Step2Finishing } from "./Step2Finishing";
 import { Step3Position } from "./Step3Position";
 import { Step4Summary } from "./Step4Summary";
 import { positionService } from "../../services/positionService";
-import { textileTypeService } from "../../services/textileTypeService";
 
 interface PanelProps {
   product: Product;
@@ -17,11 +16,11 @@ interface PanelProps {
 }
 
 type Step = 1 | 2 | 3 | 4;
-const STEP_LABELS: { label: string; subLabel: string }[] = [
-  { label: "Produkt", subLabel: "Auswahl" },
-  { label: "Veredelung", subLabel: "Stick · Druck" },
-  { label: "Position", subLabel: "Platzierung" },
-  { label: "Zusammenfassung", subLabel: "Anfrage" },
+const STEP_LABELS: { label: string }[] = [
+  { label: "Produkt" },
+  { label: "Veredelung" },
+  { label: "Position" },
+  { label: "Zusammenfassung" },
 ];
 
 export function ProductDetailPanel({ product, onClose }: PanelProps) {
@@ -34,7 +33,6 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
   const [positionNote, setPositionNote] = useState("");
   const [finalNote, setFinalNote] = useState("");
 
-  const textileType = textileTypeService.getById(product.textileTypeId);
   const variant = product.colorVariants.find((c) => c.id === colorId);
 
   useEffect(() => {
@@ -93,83 +91,39 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex">
+      {/* Blur-Backdrop links – zeigt die darunterliegende Seite unscharf */}
       <button
         type="button"
         onClick={onClose}
         aria-label="Panel schließen"
-        className="flex-1 bg-[rgba(7,14,26,0.55)] backdrop-blur-[2px] animate-fade-in cursor-default"
+        className="shrink-0 bg-[rgba(0,0,0,0.2)] backdrop-blur-[5px] animate-fade-in cursor-default"
+        style={{ width: "12.5%", minWidth: 80 }}
       />
       <aside
-        className="w-full md:w-[88%] lg:max-w-[1200px] h-full bg-dk-1 text-white flex flex-col animate-slide-in-right shadow-[-40px_0_80px_-30px_rgba(0,0,0,0.6)] relative overflow-hidden"
+        className="flex-1 h-full bg-[#001b26] text-white flex flex-col animate-slide-in-right relative overflow-hidden"
         role="dialog"
         aria-label={`${product.name} konfigurieren`}
       >
-        <div className="cyan-glow" aria-hidden="true" />
-
-        {/* Top bar */}
-        <div className="relative z-10 flex justify-between items-start px-10 lg:px-14 pt-7">
-          <div className="flex items-center gap-2.5 text-[13px] text-dk-muted2 mt-1.5">
-            {textileType?.name ?? "Sortiment"}
-            <span className="w-[3px] h-[3px] bg-dk-muted2 rounded-full inline-block" />
-            <strong className="text-white font-medium">{product.name}</strong>
+        {/* Top-Bar: Stepper + Schließen */}
+        <div className="relative z-10 border-b border-white/10">
+          <div className="flex items-start gap-6 px-8 lg:px-12 pt-7 pb-6">
+            <div className="flex-1 max-w-[1200px] mx-auto w-full">
+              <ProgressBar
+                totalSteps={4}
+                currentStep={step}
+                labels={STEP_LABELS}
+                onJump={(s) => setStep(s as Step)}
+              />
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Schließen"
+              className="mt-2 w-10 h-10 grid place-items-center text-white/80 hover:text-white transition-colors cursor-pointer"
+            >
+              <CloseIcon size={22} />
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Schließen"
-            className="w-9 h-9 rounded-full bg-white/[0.08] border border-dk-line grid place-items-center cursor-pointer transition-colors hover:bg-white/[0.16]"
-          >
-            <CloseIcon size={14} />
-          </button>
-        </div>
-
-        {/* Header */}
-        <div className="relative z-10 px-10 lg:px-14 pt-6 pb-7 flex items-end justify-between gap-12">
-          <div>
-            <h2 className="text-3xl md:text-[44px] font-medium tracking-tight leading-[1.05] m-0 mb-2.5">
-              {step === 1 && (
-                <>
-                  {product.name}
-                </>
-              )}
-              {step === 2 && (
-                <>
-                  Druck oder <em className="text-cyan">Stick</em>?
-                </>
-              )}
-              {step === 3 && (
-                <>
-                  Wo soll dein <em className="text-cyan">Logo</em> hin?
-                </>
-              )}
-              {step === 4 && (
-                <>
-                  Alles auf einen <em className="text-cyan">Blick</em>
-                </>
-              )}
-            </h2>
-            <p className="text-base text-dk-muted m-0 max-w-[560px] leading-[1.55]">
-              {step === 1 && product.shortDescription}
-              {step === 2 &&
-                "Wähle die Hauptart der Veredelung. Das konkrete Verfahren stimmen wir mit dir individuell ab."}
-              {step === 3 && "Mehrfachauswahl ist möglich – auch über Bereiche hinweg."}
-              {step === 4 && "Prüfe deine Auswahl – und leg sie in den Anfragekorb."}
-            </p>
-          </div>
-          <div className="hidden md:inline-flex items-center gap-2.5 px-3.5 py-2 border border-dk-line2 rounded-full text-xs text-dk-muted tracking-[0.06em] uppercase">
-            <span className="w-1.5 h-1.5 bg-cyan rounded-full animate-pulse-dot" />
-            Mini-Konfigurator
-          </div>
-        </div>
-
-        {/* Progress */}
-        <div className="relative z-10 px-10 lg:px-14 pt-4 pb-9 border-b border-dk-line">
-          <ProgressBar
-            totalSteps={4}
-            currentStep={step}
-            labels={STEP_LABELS}
-            onJump={(s) => setStep(s as Step)}
-          />
         </div>
 
         {/* Body */}
@@ -179,8 +133,10 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
               product={product}
               selectedColorId={colorId}
               quantity={quantity}
+              canProceed={Boolean(canProceed)}
               onSelectColor={setColorId}
               onQuantity={setQuantity}
+              onNext={next}
             />
           )}
           {step === 2 && (
@@ -215,34 +171,34 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
           )}
         </div>
 
-        {/* Sticky footer */}
-        <div className="relative z-10 border-t border-dk-line bg-dk-0 px-10 lg:px-14 py-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6">
-          <div className="flex flex-col gap-1 min-w-0">
-            <span className="caps-label text-dk-muted2">Deine Auswahl</span>
-            <div className="text-[19px] text-white font-medium tracking-[-0.005em] truncate">
-              {product.name}
-              <span className="text-dk-muted2 mx-2 font-normal">·</span>
-              <span className="text-cyan">{variant?.name ?? "—"}</span>
-              <span className="text-dk-muted2 mx-2 font-normal">·</span>
-              {quantity} Stück
-              {finishing && (
-                <>
-                  <span className="text-dk-muted2 mx-2 font-normal">·</span>
-                  {finishing === "druck" ? "Druck" : "Stick"}
-                </>
-              )}
-              {positionLabels.length > 0 && (
-                <>
-                  <span className="text-dk-muted2 mx-2 font-normal">·</span>
-                  {positionLabels.slice(0, 2).join(" + ")}
-                  {positionLabels.length > 2 ? " …" : ""}
-                </>
-              )}
+        {/* Sticky Footer – nur Schritt 2–4 (Schritt 1 hat seinen CTA inline rechts) */}
+        {step > 1 && (
+          <div className="relative z-10 border-t border-white/10 bg-[#00121a] px-10 lg:px-14 py-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6">
+            <div className="flex flex-col gap-1 min-w-0">
+              <span className="caps-label text-dk-muted2">Deine Auswahl</span>
+              <div className="text-[19px] text-white font-medium tracking-[-0.005em] truncate">
+                {product.name}
+                <span className="text-dk-muted2 mx-2 font-normal">·</span>
+                <span className="text-cyan">{variant?.name ?? "—"}</span>
+                <span className="text-dk-muted2 mx-2 font-normal">·</span>
+                {quantity} Stück
+                {finishing && (
+                  <>
+                    <span className="text-dk-muted2 mx-2 font-normal">·</span>
+                    {finishing === "druck" ? "Druck" : "Stick"}
+                  </>
+                )}
+                {positionLabels.length > 0 && (
+                  <>
+                    <span className="text-dk-muted2 mx-2 font-normal">·</span>
+                    {positionLabels.slice(0, 2).join(" + ")}
+                    {positionLabels.length > 2 ? " …" : ""}
+                  </>
+                )}
+              </div>
+              <span className="italic text-xs text-dk-muted2 mt-0.5">{stepHints[step]}</span>
             </div>
-            <span className="italic text-xs text-dk-muted2 mt-0.5">{stepHints[step]}</span>
-          </div>
-          <div className="flex items-center gap-7 self-end md:self-auto">
-            {step > 1 ? (
+            <div className="flex items-center gap-7 self-end md:self-auto">
               <button
                 type="button"
                 onClick={prev}
@@ -250,31 +206,23 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
               >
                 <ArrowLeftIcon size={14} /> Zurück
               </button>
-            ) : (
-              <button
-                type="button"
-                onClick={onClose}
-                className="text-sm text-dk-muted hover:text-white transition-colors"
-              >
-                Abbrechen
-              </button>
-            )}
-            <div className="flex flex-col items-end gap-1.5">
-              {step < 4 ? (
-                <Button variant="primary" size="md" onClick={next} disabled={!canProceed}>
-                  Weiter <ArrowRightIcon size={16} />
-                </Button>
-              ) : (
-                <Button variant="primary" size="md" onClick={handleAddToCart} disabled={!canProceed}>
-                  In Anfragekorb <CheckIcon size={16} />
-                </Button>
-              )}
-              <span className="text-[11px] text-dk-muted2 tracking-[0.1em] uppercase">
-                Schritt {step} von 4
-              </span>
+              <div className="flex flex-col items-end gap-1.5">
+                {step < 4 ? (
+                  <Button variant="primary" size="md" onClick={next} disabled={!canProceed}>
+                    Weiter <ArrowRightIcon size={16} />
+                  </Button>
+                ) : (
+                  <Button variant="primary" size="md" onClick={handleAddToCart} disabled={!canProceed}>
+                    In Anfragekorb <CheckIcon size={16} />
+                  </Button>
+                )}
+                <span className="text-[11px] text-dk-muted2 tracking-[0.1em] uppercase">
+                  Schritt {step} von 4
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </aside>
     </div>
   );
