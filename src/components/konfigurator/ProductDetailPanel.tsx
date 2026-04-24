@@ -90,17 +90,24 @@ export function ProductDetailPanel({ product, onClose }: PanelProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex">
-      {/* Blur-Backdrop links – zeigt die darunterliegende Seite unscharf */}
+    <div className="fixed inset-0 z-50">
+      {/* Vollflächiger Blur-Backdrop – schon vor dem Slide sichtbar, damit das
+          Panel keine harte Kante beim Reinfahren erzeugt */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[rgba(0,0,0,0.2)] backdrop-blur-[5px] animate-fade-in pointer-events-none"
+      />
+      {/* Klickfläche links vom Panel schließt das Overlay */}
       <button
         type="button"
         onClick={onClose}
         aria-label="Panel schließen"
-        className="shrink-0 bg-[rgba(0,0,0,0.2)] backdrop-blur-[5px] animate-fade-in cursor-default"
+        className="absolute left-0 top-0 bottom-0 cursor-default"
         style={{ width: "12.5%", minWidth: 80 }}
       />
       <aside
-        className="flex-1 h-full bg-[#001b26] text-white flex flex-col animate-slide-in-right relative overflow-hidden"
+        className="absolute right-0 top-0 bottom-0 bg-[#001b26] text-white flex flex-col animate-slide-in-right overflow-hidden"
+        style={{ width: "87.5%" }}
         role="dialog"
         aria-label={`${product.name} konfigurieren`}
       >

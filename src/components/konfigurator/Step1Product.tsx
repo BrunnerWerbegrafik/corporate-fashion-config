@@ -14,6 +14,40 @@ interface Step1Props {
   onNext: () => void;
 }
 
+// Glas-Pill (Mengenregler + Pills) – dunkle semi-transparente Fläche mit
+// Top-Highlight, feinem Rand und weichem Außen-Schatten
+const glassPill: React.CSSProperties = {
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%)",
+  border: "1px solid rgba(255, 255, 255, 0.09)",
+  boxShadow: [
+    "inset 0 1px 0 rgba(255, 255, 255, 0.10)",
+    "inset 0 -1px 0 rgba(0, 0, 0, 0.20)",
+    "0 4px 14px rgba(0, 0, 0, 0.25)",
+  ].join(", "),
+  backdropFilter: "blur(10px)",
+  WebkitBackdropFilter: "blur(10px)",
+};
+
+// Primär-CTA – kräftiger Blau-Gradient mit 3D-Tiefe
+const glassCta: React.CSSProperties = {
+  background:
+    "linear-gradient(180deg, #1AABEA 0%, #009FE3 45%, #00628F 100%)",
+  border: "1px solid rgba(0, 159, 227, 0.45)",
+  boxShadow: [
+    "0 8px 24px rgba(0, 80, 130, 0.35)",
+    "inset 0 1px 1px rgba(255, 255, 255, 0.30)",
+    "inset 0 -2px 5px rgba(0, 0, 0, 0.18)",
+  ].join(", "),
+};
+
+// Specs-Pills – sehr subtiles Glas
+const glassSpecPill: React.CSSProperties = {
+  background: "rgba(255, 255, 255, 0.045)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+};
+
 export function Step1Product({
   product,
   selectedColorId,
@@ -48,7 +82,6 @@ export function Step1Product({
     <div className="grid grid-cols-1 lg:grid-cols-[840fr_520fr] gap-10 lg:gap-x-[80px] lg:gap-y-10 pt-[80px] pb-[80px] max-w-[1440px]">
       {/* LINKS: Bilder */}
       <div className="flex flex-col gap-10">
-        {/* Hauptbild: 840×600 Backdrop, PNG über volle Höhe zentriert */}
         <div className="relative aspect-[840/600] bg-white/[0.05] overflow-hidden flex items-end justify-center">
           <img
             src={mainImage}
@@ -57,7 +90,6 @@ export function Step1Product({
           />
         </div>
 
-        {/* Zwei Detailbilder: 460 vs 340 breit, 40px gap */}
         {smallImages.length > 0 && (
           <div className="grid gap-10" style={{ gridTemplateColumns: "460fr 340fr" }}>
             {smallImages.map((img, i) => (
@@ -86,10 +118,15 @@ export function Step1Product({
           </div>
         )}
 
-        {/* Titel */}
+        {/* Titel mit HG-abstrakt-blau als Text-Fill (bg-clip-text) */}
         <h2
-          className="text-[40px] leading-[1.05] m-0 text-cyan mb-6"
-          style={{ fontWeight: 500 }}
+          className="text-[40px] leading-[1.05] m-0 mb-6 bg-clip-text bg-cover bg-center"
+          style={{
+            fontWeight: 500,
+            backgroundImage: 'url("/images/font-hintergrund/HG-abstrakt-blau.webp")',
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+          }}
         >
           {product.name}
         </h2>
@@ -99,13 +136,13 @@ export function Step1Product({
           {product.longDescription}
         </p>
 
-        {/* Specs als Pills */}
+        {/* Specs als Glas-Pills */}
         <div className="flex flex-wrap gap-[10px] mb-10">
           {pills.map((p) => (
             <span
               key={p}
-              className="inline-flex items-center px-[14px] h-[28px] rounded-full bg-white/[0.05] text-[13px] text-white whitespace-nowrap"
-              style={{ fontWeight: 300 }}
+              className="inline-flex items-center px-[14px] h-[28px] rounded-full text-[13px] text-white whitespace-nowrap"
+              style={{ ...glassSpecPill, fontWeight: 300 }}
             >
               {p}
             </span>
@@ -130,14 +167,17 @@ export function Step1Product({
           </div>
         </div>
 
-        {/* Menge (140×47) + CTA (360×47) mit 20px Gap */}
+        {/* Menge + CTA als Glas-Elemente */}
         <div className="flex flex-wrap items-center gap-5">
-          <div className="inline-flex items-center justify-between h-[47px] w-[140px] px-5 rounded-full bg-white/[0.05]">
+          <div
+            className="inline-flex items-center justify-between h-[47px] w-[140px] px-5 rounded-full"
+            style={glassPill}
+          >
             <button
               type="button"
               aria-label="Weniger"
               onClick={() => onQuantity(Math.max(product.minQuantity, quantity - 1))}
-              className="text-white/80 hover:text-cyan transition-colors cursor-pointer"
+              className="text-white/85 hover:text-cyan transition-colors cursor-pointer"
             >
               <MinusIcon size={18} />
             </button>
@@ -148,7 +188,7 @@ export function Step1Product({
               type="button"
               aria-label="Mehr"
               onClick={() => onQuantity(quantity + 1)}
-              className="text-white/80 hover:text-cyan transition-colors cursor-pointer"
+              className="text-white/85 hover:text-cyan transition-colors cursor-pointer"
             >
               <PlusIcon size={18} />
             </button>
@@ -158,8 +198,8 @@ export function Step1Product({
             type="button"
             onClick={onNext}
             disabled={!canProceed}
-            className="inline-flex items-center justify-between h-[47px] w-[360px] px-10 rounded-full bg-gradient-to-r from-[rgba(0,159,227,0.8)] to-[rgba(0,90,128,0.8)] text-white text-[17px] transition-all hover:from-cyan hover:to-[#005A80] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-            style={{ fontWeight: 500 }}
+            className="inline-flex items-center justify-between h-[47px] w-[360px] px-10 rounded-full text-white text-[17px] transition-[filter,transform] hover:brightness-110 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            style={{ ...glassCta, fontWeight: 500 }}
           >
             Veredelung auswählen
             <ArrowRightIcon size={18} />

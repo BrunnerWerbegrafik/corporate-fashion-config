@@ -7,6 +7,40 @@ interface ProgressBarProps {
   onJump?: (step: number) => void;
 }
 
+const activeBubble: React.CSSProperties = {
+  background:
+    "radial-gradient(circle at 35% 28%, #4CB8E6 0%, #009FE3 42%, #005A80 100%)",
+  border: "1px solid rgba(0, 159, 227, 0.5)",
+  boxShadow: [
+    "0 6px 20px rgba(0, 70, 130, 0.45)",
+    "0 0 0 6px rgba(0, 159, 227, 0.08)",
+    "inset 0 2px 3px rgba(255, 255, 255, 0.28)",
+    "inset 0 -3px 5px rgba(0, 0, 0, 0.18)",
+  ].join(", "),
+};
+
+const inactiveBubble: React.CSSProperties = {
+  background:
+    "radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 45%, rgba(0, 0, 0, 0.18) 100%)",
+  border: "1px solid rgba(255, 255, 255, 0.15)",
+  boxShadow: [
+    "0 4px 14px rgba(0, 0, 0, 0.45)",
+    "inset 0 1px 1px rgba(255, 255, 255, 0.10)",
+    "inset 0 -2px 3px rgba(0, 0, 0, 0.22)",
+  ].join(", "),
+};
+
+const doneBubble: React.CSSProperties = {
+  background:
+    "radial-gradient(circle at 35% 28%, rgba(0, 159, 227, 0.22) 0%, rgba(0, 159, 227, 0.10) 45%, rgba(0, 0, 0, 0.15) 100%)",
+  border: "1px solid rgba(0, 159, 227, 0.5)",
+  boxShadow: [
+    "0 4px 14px rgba(0, 50, 90, 0.45)",
+    "inset 0 1px 1px rgba(255, 255, 255, 0.12)",
+    "inset 0 -2px 3px rgba(0, 0, 0, 0.22)",
+  ].join(", "),
+};
+
 export function ProgressBar({ totalSteps, currentStep, labels = [], onJump }: ProgressBarProps) {
   return (
     <div
@@ -33,12 +67,9 @@ export function ProgressBar({ totalSteps, currentStep, labels = [], onJump }: Pr
           >
             <div
               className={`w-[50px] h-[50px] rounded-full grid place-items-center text-[15px] font-medium tabular-nums transition-all duration-200 ${
-                active
-                  ? "bg-gradient-to-r from-[rgba(0,159,227,0.8)] to-[rgba(0,90,128,0.8)] border border-cyan/30 text-white"
-                  : done
-                  ? "bg-transparent border border-cyan text-cyan"
-                  : "bg-white/[0.04] border border-white/20 text-white/80"
+                active ? "text-white" : done ? "text-cyan" : "text-white/85"
               }`}
+              style={active ? activeBubble : done ? doneBubble : inactiveBubble}
             >
               {done ? <CheckIcon size={16} /> : step}
             </div>

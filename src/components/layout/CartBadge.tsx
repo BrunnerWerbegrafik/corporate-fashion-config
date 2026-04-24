@@ -24,7 +24,7 @@ export function CartBadge({ theme }: CartBadgeProps) {
       </span>
       <span
         key={badgePulseKey}
-        className={`w-5 h-5 grid place-items-center bg-cyan text-white text-[13px] font-bold leading-none tabular-nums ${
+        className={`w-[22px] h-[22px] rounded-full grid place-items-center bg-cyan text-white text-[13px] font-bold leading-none tabular-nums ${
           totalItems > 0 ? "animate-badge-pulse" : ""
         }`}
         style={{ fontFamily: '"Avenir", sans-serif', fontWeight: 900 }}
